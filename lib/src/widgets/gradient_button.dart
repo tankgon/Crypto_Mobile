@@ -10,7 +10,7 @@ class GradientButton extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: 60,
-      margin: const EdgeInsets.only(top: 80),
+      margin: const EdgeInsets.only(top: 50),
       decoration: const ShapeDecoration(
         shape: StadiumBorder(),
         gradient: LinearGradient(

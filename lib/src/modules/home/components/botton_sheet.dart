@@ -1,17 +1,18 @@
-import 'package:flutter/material.dart';
-import 'package:movie_flutter/src/modules/home/components/text_number.dart';
+// ignore_for_file: prefer_typing_uninitialized_variables
 
-import '../../../config/themes/gradient_button.dart';
+import 'package:flutter/material.dart';
+import 'package:movie_flutter/src/widgets/input_number.dart';
+
+import '../../../widgets/gradient_button.dart';
+import '../../../widgets/input_token.dart';
 
 class BottonSheet extends StatelessWidget {
-  const BottonSheet({
-    Key? key,
-  }) : super(key: key);
-
+  const BottonSheet({Key? key, this.size}) : super(key: key);
+  final size;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        height: 350,
+        height: size.height / 2,
         child: Scaffold(
           resizeToAvoidBottomInset: true,
           body: SingleChildScrollView(
@@ -29,7 +30,11 @@ class BottonSheet extends StatelessWidget {
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 30),
                   child: Column(
-                    children: const [TextNumber(), GradientButton()],
+                    children: const [
+                      InputToken(),
+                      TextNumber(),
+                      GradientButton()
+                    ],
                   ),
                 ),
               ],

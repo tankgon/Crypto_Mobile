@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:movie_flutter/src/modules/stock/stock.dart';
 import 'package:movie_flutter/src/modules/selectCinema/select_cinema_page.dart';
-
-import '../../config/themes/gradien_text.dart';
-import '../../config/themes/gradient_button.dart';
-import '../../config/themes/gradient_icon.dart';
+import 'package:movie_flutter/src/modules/setting/setting.dart';
+import '../../widgets/gradien_text.dart';
+import '../../widgets/gradient_icon.dart';
 import 'components/botton_sheet.dart';
-import 'components/text_number.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -29,6 +26,7 @@ class _HomeState extends State<Home> {
   Widget currentScreent = const MovieDetailPage();
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: PageStorage(
         bucket: bucket,
@@ -43,7 +41,7 @@ class _HomeState extends State<Home> {
               context: context,
               backgroundColor: Colors.grey,
               builder: (BuildContext context) {
-                return const BottonSheet();
+                return BottonSheet(size: size);
               });
         },
       ),
@@ -222,7 +220,7 @@ class _HomeState extends State<Home> {
                     minWidth: 40,
                     onPressed: () {
                       setState(() {
-                        currentScreent = SelectCinemaPage();
+                        currentScreent = const Setting();
                         currentTab = 3;
                       });
                     },
@@ -231,7 +229,7 @@ class _HomeState extends State<Home> {
                       children: [
                         currentTab == 3
                             ? const GradientIcon(
-                                Icons.account_balance_wallet,
+                                Icons.settings_outlined,
                                 30,
                                 LinearGradient(
                                   colors: <Color>[
@@ -245,12 +243,12 @@ class _HomeState extends State<Home> {
                                 ),
                               )
                             : const Icon(
-                                Icons.account_balance_wallet,
+                                Icons.settings_outlined,
                                 color: Colors.grey,
                               ),
                         currentTab == 3
                             ? const GradientText(
-                                'withdraw',
+                                'Setting',
                                 gradient: LinearGradient(
                                   colors: [
                                     Color(0xff8AD4EC),
@@ -261,7 +259,7 @@ class _HomeState extends State<Home> {
                                 ),
                               )
                             : const Text(
-                                'withdraw',
+                                'Setting',
                                 style: TextStyle(
                                   color: Colors.grey,
                                 ),

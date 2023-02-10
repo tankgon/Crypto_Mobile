@@ -3,7 +3,8 @@
 import 'package:flutter/material.dart';
 import 'components/background_widget.dart';
 import 'components/button_acess.dart';
-import '../../config/themes/gradien_text.dart';
+import '../../widgets/gradien_text.dart';
+import 'components/stock_item.dart';
 import 'components/value_stock.dart';
 
 class MovieDetailPage extends StatefulWidget {
@@ -172,7 +173,7 @@ class _MovieDetailPageState extends State<MovieDetailPage>
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
-                              Stock(
+                              StockItem(
                                 size: size,
                                 name: "ACB",
                                 san: "12.52 \$",
@@ -181,7 +182,7 @@ class _MovieDetailPageState extends State<MovieDetailPage>
                                 thamchieu: '17.32',
                                 khoiluong: '231',
                               ),
-                              Stock(
+                              StockItem(
                                 size: size,
                                 name: "TCB",
                                 san: "20.53 \$",
@@ -190,7 +191,7 @@ class _MovieDetailPageState extends State<MovieDetailPage>
                                 thamchieu: '15.32',
                                 khoiluong: '312',
                               ),
-                              Stock(
+                              StockItem(
                                 size: size,
                                 name: "VCB",
                                 san: "54.65 \$",
@@ -225,85 +226,5 @@ class _MovieDetailPageState extends State<MovieDetailPage>
           content,
           style: const TextStyle(color: Colors.white, fontSize: 20),
         ));
-  }
-}
-
-class Stock extends StatelessWidget {
-  const Stock({
-    Key? key,
-    required this.size,
-    required this.name,
-    required this.san,
-    required this.sann,
-    required this.tran,
-    required this.thamchieu,
-    required this.khoiluong,
-  }) : super(key: key);
-
-  final Size size;
-  final name;
-  final san;
-  final sann;
-  final tran;
-  final thamchieu;
-  final khoiluong;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 40),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          SizedBox(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  name,
-                  style: const TextStyle(
-                      fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-                Container(
-                  width: size.width / 2,
-                  padding: const EdgeInsets.only(top: 8),
-                  child: Row(
-                    children: [
-                      ValueStock(
-                        name: sann,
-                        color: Colors.yellow,
-                      ),
-                      ValueStock(
-                        name: tran,
-                        color: Colors.blue,
-                      ),
-                      ValueStock(
-                        name: thamchieu,
-                        color: Colors.pink,
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Text(
-                san,
-                style:
-                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-              Text(
-                khoiluong,
-                style:
-                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-            ],
-          )
-        ],
-      ),
-    );
   }
 }
