@@ -14,17 +14,20 @@ class StockItem extends StatelessWidget {
   }) : super(key: key);
 
   final Size size;
-  final name;
-  final san;
-  final sann;
-  final tran;
-  final thamchieu;
-  final khoiluong;
+  final String name;
+  final String san;
+  final String sann;
+  final String tran;
+  final String thamchieu;
+  final String khoiluong;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 40),
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+      margin: const EdgeInsets.only(top: 10, bottom: 10, left: 20, right: 20),
+      decoration: BoxDecoration(
+          color: Colors.white10, borderRadius: BorderRadius.circular(16)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -35,24 +38,25 @@ class StockItem extends StatelessWidget {
                 Text(
                   name,
                   style: const TextStyle(
-                      fontSize: 20, fontWeight: FontWeight.bold),
+                      fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 Container(
-                  width: size.width / 2,
+                  width: size.width / 2.5,
                   padding: const EdgeInsets.only(top: 8),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       ValueStock(
                         name: sann,
-                        color: Colors.yellow,
+                        color: Colors.yellowAccent,
                       ),
                       ValueStock(
                         name: tran,
-                        color: Colors.blue,
+                        color: Colors.blueAccent,
                       ),
                       ValueStock(
                         name: thamchieu,
-                        color: Colors.pink,
+                        color: Colors.pinkAccent,
                       ),
                     ],
                   ),
@@ -66,12 +70,12 @@ class StockItem extends StatelessWidget {
               Text(
                 san,
                 style:
-                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               Text(
                 khoiluong,
                 style:
-                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
             ],
           )

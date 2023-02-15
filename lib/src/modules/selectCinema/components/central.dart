@@ -5,6 +5,7 @@ class Central extends StatelessWidget {
       : super(key: key);
 
   final Size size;
+  // ignore: prefer_typing_uninitialized_variables
   final time;
 
   @override

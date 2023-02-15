@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ButtonAcess extends StatelessWidget {
-  final name;
-  final color;
+  final String? name;
+  final Color? color;
 
   const ButtonAcess({
     Key? key,
@@ -26,7 +26,7 @@ class ButtonAcess extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  name,
+                  name!,
                   style: const TextStyle(fontSize: 20),
                 ),
               ],

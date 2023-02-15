@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:movie_flutter/src/modules/profile/profile.dart';
 import 'package:movie_flutter/src/modules/stock/stock.dart';
 import 'package:movie_flutter/src/modules/selectCinema/select_cinema_page.dart';
 import 'package:movie_flutter/src/modules/setting/setting.dart';
 import '../../widgets/gradien_text.dart';
 import '../../widgets/gradient_icon.dart';
+import '../chart/chart.dart';
 import 'components/botton_sheet.dart';
 
 class Home extends StatefulWidget {
@@ -39,9 +41,8 @@ class _HomeState extends State<Home> {
               isScrollControlled: false,
               barrierColor: Colors.white24,
               context: context,
-              backgroundColor: Colors.grey,
               builder: (BuildContext context) {
-                return BottonSheet(size: size);
+                return const BottonSheet();
               });
         },
       ),
@@ -113,7 +114,7 @@ class _HomeState extends State<Home> {
                     minWidth: 40,
                     onPressed: () {
                       setState(() {
-                        currentScreent = SelectCinemaPage();
+                        currentScreent = const Chart();
                         currentTab = 1;
                       });
                     },
@@ -169,7 +170,7 @@ class _HomeState extends State<Home> {
                     minWidth: 40,
                     onPressed: () {
                       setState(() {
-                        currentScreent = SelectCinemaPage();
+                        currentScreent = const Profile();
                         currentTab = 2;
                       });
                     },

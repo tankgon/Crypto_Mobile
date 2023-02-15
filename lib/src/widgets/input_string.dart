@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 class InputToken extends StatelessWidget {
   const InputToken({
     Key? key,
+    this.label,
   }) : super(key: key);
+
+  final String? label;
 
   @override
   Widget build(BuildContext context) {
@@ -14,14 +17,14 @@ class InputToken extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
           border: Border.all(color: Colors.grey)),
       child: TextFormField(
-        decoration: const InputDecoration(
+        decoration: InputDecoration(
             hintText: '',
-            hintStyle: TextStyle(
+            hintStyle: const TextStyle(
               color: Colors.white,
               overflow: TextOverflow.ellipsis,
             ),
-            labelText: ('Xác nhận Token'),
-            labelStyle: TextStyle(
+            labelText: label,
+            labelStyle: const TextStyle(
               color: Colors.grey,
               fontSize: 16,
             ),

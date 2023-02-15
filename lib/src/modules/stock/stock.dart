@@ -1,11 +1,6 @@
-// ignore_for_file: prefer_typing_uninitialized_variables
-
 import 'package:flutter/material.dart';
 import 'components/background_widget.dart';
-import 'components/button_acess.dart';
-import '../../widgets/gradien_text.dart';
 import 'components/stock_item.dart';
-import 'components/value_stock.dart';
 
 class MovieDetailPage extends StatefulWidget {
   const MovieDetailPage({Key? key}) : super(key: key);
@@ -16,32 +11,29 @@ class MovieDetailPage extends StatefulWidget {
 
 class _MovieDetailPageState extends State<MovieDetailPage>
     with SingleTickerProviderStateMixin {
-  late TabController _tabController;
-
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 2, vsync: this);
   }
 
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
-    return Scaffold(
-      body: SingleChildScrollView(
+    return SafeArea(
+      child: SingleChildScrollView(
           child: Stack(
         children: [
           BackGroundWidget(size: size),
           Container(
             height: size.height,
             decoration: const BoxDecoration(
-                gradient: LinearGradient(colors: [
-              Colors.black87,
-              Colors.black,
-            ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
+                gradient: LinearGradient(
+                    colors: [Colors.black87, Color(0xff131e30)],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter)),
           ),
           Container(
-            margin: const EdgeInsets.only(top: 44),
+            margin: const EdgeInsets.only(top: 8),
             child: ElevatedButton(
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
@@ -72,12 +64,12 @@ class _MovieDetailPageState extends State<MovieDetailPage>
           ),
           Container(
               width: size.width,
-              margin: const EdgeInsets.only(top: 54),
+              margin: const EdgeInsets.only(top: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
                   Text(
-                    'Etherium Main',
+                    'BitBank Main',
                     style: TextStyle(fontSize: 16),
                   ),
                   Padding(
@@ -90,129 +82,40 @@ class _MovieDetailPageState extends State<MovieDetailPage>
                   )
                 ],
               )),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Container(
-                padding: EdgeInsets.only(top: size.height / 6),
-                alignment: Alignment.center,
-                child: Column(
-                  children: [
-                    GradientText(
-                      '9.2632 ETH',
-                      style: const TextStyle(fontSize: 40),
-                      gradient: LinearGradient(colors: [
-                        Colors.blue.shade400,
-                        Colors.blue.shade100,
-                      ]),
-                    ),
-                    Container(
-                      width: size.width / 2,
-                      padding: const EdgeInsets.only(top: 30, bottom: 30),
-                      child: Row(
-                        children: const [
-                          ValueStock(
-                            name: '12.45',
-                            color: Colors.yellow,
-                          ),
-                          ValueStock(
-                            name: '20.34',
-                            color: Colors.blue,
-                          ),
-                          ValueStock(
-                            name: '17.93',
-                            color: Colors.pink,
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      width: size.width / 1.15,
-                      child: Row(
-                        children: const [
-                          ButtonAcess(
-                            name: "Mua",
-                            color: Colors.green,
-                          ),
-                          ButtonAcess(
-                            name: "Bán",
-                            color: Colors.pinkAccent,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
+          Padding(
+            padding: const EdgeInsets.only(top: 60),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                StockItem(
+                  size: size,
+                  name: "ACB",
+                  san: "12.52 \$",
+                  sann: '12.32',
+                  tran: '20.43',
+                  thamchieu: '17.32',
+                  khoiluong: '231',
                 ),
-              ),
-              SizedBox(
-                height: size.height,
-                child: Column(
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.only(top: 20),
-                      alignment: Alignment.center,
-                      width: size.width / 1.5,
-                      child: TabBar(
-                        tabs: const [
-                          Tab(text: 'Token'),
-                          Tab(text: 'Collectibles')
-                        ],
-                        controller: _tabController,
-                        indicatorSize: TabBarIndicatorSize.label,
-                        labelStyle:
-                            const TextStyle(color: Colors.white, fontSize: 20),
-                        unselectedLabelStyle:
-                            const TextStyle(color: Colors.black, fontSize: 20),
-                        indicatorColor: Colors.white,
-                      ),
-                    ),
-                    Expanded(
-                      child: TabBarView(
-                        controller: _tabController,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              StockItem(
-                                size: size,
-                                name: "ACB",
-                                san: "12.52 \$",
-                                sann: '12.32',
-                                tran: '20.43',
-                                thamchieu: '17.32',
-                                khoiluong: '231',
-                              ),
-                              StockItem(
-                                size: size,
-                                name: "TCB",
-                                san: "20.53 \$",
-                                sann: '16.12',
-                                tran: '22.45',
-                                thamchieu: '15.32',
-                                khoiluong: '312',
-                              ),
-                              StockItem(
-                                size: size,
-                                name: "VCB",
-                                san: "54.65 \$",
-                                sann: '22.32',
-                                tran: '25.43',
-                                thamchieu: '13.32',
-                                khoiluong: '32',
-                              ),
-                            ],
-                          ),
-                          Container(
-                            alignment: Alignment.topLeft,
-                            child: const Text('Review Page'),
-                          )
-                        ],
-                      ),
-                    )
-                  ],
+                StockItem(
+                  size: size,
+                  name: "TCB",
+                  san: "20.53 \$",
+                  sann: '16.12',
+                  tran: '22.45',
+                  thamchieu: '15.32',
+                  khoiluong: '312',
                 ),
-              )
-            ],
+                StockItem(
+                  size: size,
+                  name: "VCB",
+                  san: "54.65 \$",
+                  sann: '22.32',
+                  tran: '25.43',
+                  thamchieu: '13.32',
+                  khoiluong: '32',
+                ),
+              ],
+            ),
           ),
         ],
       )),

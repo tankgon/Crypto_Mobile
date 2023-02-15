@@ -1,43 +1,99 @@
-// ignore_for_file: prefer_typing_uninitialized_variables
-
 import 'package:flutter/material.dart';
-import 'package:movie_flutter/src/widgets/input_number.dart';
 
 import '../../../widgets/gradient_button.dart';
-import '../../../widgets/input_token.dart';
+import '../../../widgets/input_number.dart';
+import '../../../widgets/input_string.dart';
 
-class BottonSheet extends StatelessWidget {
-  const BottonSheet({Key? key, this.size}) : super(key: key);
-  final size;
+class BottonSheet extends StatefulWidget {
+  const BottonSheet({Key? key}) : super(key: key);
+  @override
+  State<BottonSheet> createState() => _BottonSheet();
+}
+
+class _BottonSheet extends State<BottonSheet>
+    with SingleTickerProviderStateMixin {
+  late TabController _tabControl;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabControl = TabController(length: 2, vsync: this);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-        height: size.height / 2,
+    final Size size = MediaQuery.of(context).size;
+    return Container(
+        height: size.height / 1.9,
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(30.0),
+            topRight: Radius.circular(30.0),
+          ),
+        ),
         child: Scaffold(
           resizeToAvoidBottomInset: true,
           body: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 40),
-                  child: Text(
-                    'Nạp tiền',
-                    style: TextStyle(fontSize: 20),
+            child: SizedBox(
+              height: size.height / 1.6,
+              child: Column(
+                // mainAxisAlignment: MainAxisAlignment.start,
+                // crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 40),
+                    child: TabBar(
+                      tabs: const [Tab(text: 'Admit'), Tab(text: 'Withdraw')],
+                      controller: _tabControl,
+                      indicatorSize: TabBarIndicatorSize.label,
+                      labelStyle:
+                          const TextStyle(color: Colors.white, fontSize: 20),
+                      unselectedLabelStyle:
+                          const TextStyle(color: Colors.black, fontSize: 20),
+                      indicatorColor: Colors.white,
+                    ),
                   ),
-                ),
-                Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 30),
-                  child: Column(
-                    children: const [
-                      InputToken(),
-                      TextNumber(),
-                      GradientButton()
-                    ],
+                  Expanded(
+                    child: TabBarView(
+                      controller: _tabControl,
+                      children: <Widget>[
+                        Container(
+                          margin: const EdgeInsets.symmetric(horizontal: 30),
+                          child: Column(
+                            children: const [
+                              InputToken(
+                                label: "Xác nhận Token",
+                              ),
+                              TextNumber(
+                                lable: 'Số lượng nạp',
+                              ),
+                              GradientButton(
+                                name: 'Nạp',
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.symmetric(horizontal: 30),
+                          child: Column(
+                            children: const [
+                              InputToken(
+                                label: "Xác nhận Token",
+                              ),
+                              TextNumber(
+                                lable: 'Số lượng rút',
+                              ),
+                              GradientButton(
+                                name: 'Rút',
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ));

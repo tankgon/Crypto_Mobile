@@ -18,7 +18,7 @@ class BackGroundWidget extends StatelessWidget {
               image: DecorationImage(
                   image: AssetImage('images/18.png'), fit: BoxFit.cover),
               gradient: LinearGradient(
-                  colors: [Colors.transparent, Colors.black87],
+                  colors: [Colors.transparent, Color(0xff131e30)],
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter)),
         ),
@@ -26,7 +26,7 @@ class BackGroundWidget extends StatelessWidget {
           height: 200,
           decoration: const BoxDecoration(
               gradient: LinearGradient(
-                  colors: [Colors.black87, Colors.transparent],
+                  colors: [Color(0xff131e30), Colors.transparent],
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter)),
         )

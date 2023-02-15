@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 class GradientButton extends StatelessWidget {
   const GradientButton({
     Key? key,
+    this.name,
   }) : super(key: key);
-
+  final String? name;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -27,9 +28,9 @@ class GradientButton extends StatelessWidget {
       child: MaterialButton(
         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
         shape: const StadiumBorder(),
-        child: const Text(
-          'Thêm',
-          style: TextStyle(
+        child: Text(
+          name!,
+          style: const TextStyle(
               color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
         ),
         onPressed: () {},

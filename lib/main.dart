@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         fontFamily: 'montserrat',
         // scaffoldBackgroundColor: const Color(0xff131e30),
-        scaffoldBackgroundColor: Colors.black,
+        scaffoldBackgroundColor: const Color(0xff020210),
         textTheme: Theme.of(context)
             .textTheme
             .apply(bodyColor: Colors.white, displayColor: Colors.white),
