@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:movie_flutter/src/config/themes/app_colors.dart';
+import 'package:movie_flutter/src/config/themes/app_text_styles.dart';
 import '../../models/chart.dart';
-import 'components/chart/content_chart.dart';
-import 'components/chart/header_chart.dart';
+import 'components/chart_order_book/content_chart.dart';
+import 'components/chart_order_book/header_chart.dart';
 import 'components/command/command.dart';
 import 'components/history/history.dart';
-import 'components/market/item_market.dart';
+import 'components/market/market.dart';
 
 class Chart extends StatefulWidget {
   const Chart({super.key});
@@ -48,11 +50,9 @@ class _ChartState extends State<Chart> with SingleTickerProviderStateMixin {
                       ],
                       controller: _chartController,
                       indicatorSize: TabBarIndicatorSize.label,
-                      labelStyle:
-                          const TextStyle(color: Colors.white, fontSize: 16),
-                      unselectedLabelStyle:
-                          const TextStyle(color: Colors.black, fontSize: 16),
-                      indicatorColor: Colors.white,
+                      labelStyle: AppTextStyles.h2,
+                      unselectedLabelStyle: AppTextStyles.h1,
+                      indicatorColor: AppColors.white,
                     ),
                   ),
                   Expanded(
@@ -62,63 +62,7 @@ class _ChartState extends State<Chart> with SingleTickerProviderStateMixin {
                         ContentChart(size: size, chartDagta: _chartDagta),
                         Command(size: size),
                         History(size: size),
-                        SingleChildScrollView(
-                            child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 20, horizontal: 24),
-                          child: Column(children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: const [
-                                Text(
-                                  'Giá',
-                                  style: TextStyle(
-                                      color: Colors.white54, fontSize: 16),
-                                ),
-                                Text(
-                                  'Số Lượng',
-                                  style: TextStyle(
-                                      color: Colors.white54, fontSize: 16),
-                                ),
-                                Text(
-                                  'Thời gian',
-                                  style: TextStyle(
-                                      color: Colors.white54, fontSize: 16),
-                                ),
-                              ],
-                            ),
-                            Container(
-                              width: size.width,
-                              height: 1,
-                              color: Colors.white54,
-                              margin: const EdgeInsets.symmetric(vertical: 8),
-                            ),
-                            const ItemMarket(
-                              price: '23',
-                              amount: '10',
-                              time: '12:54',
-                              color: Colors.greenAccent,
-                            ),
-                            const ItemMarket(
-                              price: '223',
-                              amount: '140',
-                              time: '12:54',
-                              color: Colors.greenAccent,
-                            ),
-                            const ItemMarket(
-                              price: '223',
-                              amount: '10',
-                              time: '12:54',
-                              color: Colors.redAccent,
-                            ),
-                            const ItemMarket(
-                              price: '213',
-                              amount: '10',
-                              time: '12:54',
-                              color: Colors.greenAccent,
-                            ),
-                          ]),
-                        ))
+                        Market(size: size)
                       ],
                     ),
                   )

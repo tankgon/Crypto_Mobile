@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:movie_flutter/src/config/themes/app_colors.dart';
+import 'package:movie_flutter/src/config/themes/app_text_styles.dart';
 
 import '../stock/components/background_widget.dart';
 import 'components/item_setting.dart';
@@ -14,11 +16,7 @@ class Setting extends StatelessWidget {
       BackGroundWidget(size: size),
       Container(
         height: size.height,
-        decoration: const BoxDecoration(
-            gradient: LinearGradient(colors: [
-          Colors.black87,
-          Color(0xff131e30),
-        ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
+        decoration: AppColors.gradientMain,
       ),
       Align(
         child: SizedBox(
@@ -29,7 +27,7 @@ class Setting extends StatelessWidget {
                 padding: EdgeInsets.symmetric(vertical: 40),
                 child: Text(
                   'Settings',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: AppTextStyles.h2W,
                 ),
               ),
               ItemSetting(

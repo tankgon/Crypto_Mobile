@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_flutter/src/config/themes/app_text_styles.dart';
 
 class ButtonAcess extends StatelessWidget {
   final String? name;
@@ -27,7 +28,7 @@ class ButtonAcess extends StatelessWidget {
               children: [
                 Text(
                   name!,
-                  style: const TextStyle(fontSize: 20),
+                  style: AppTextStyles.h2,
                 ),
               ],
             ),

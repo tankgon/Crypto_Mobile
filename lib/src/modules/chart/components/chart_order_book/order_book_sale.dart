@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_flutter/src/config/themes/app_text_styles.dart';
 
 class OrderBookSale extends StatelessWidget {
   const OrderBookSale({Key? key, this.amount, this.mass, this.color})
@@ -21,7 +22,7 @@ class OrderBookSale extends StatelessWidget {
           ),
           Text(
             mass!,
-            style: const TextStyle(fontSize: 16),
+            style: AppTextStyles.h1,
           ),
         ],
       ),

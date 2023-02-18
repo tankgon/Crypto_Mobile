@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_flutter/src/config/themes/app_text_styles.dart';
 
 class ItemMarket extends StatelessWidget {
   const ItemMarket({
@@ -27,11 +28,11 @@ class ItemMarket extends StatelessWidget {
           ),
           Text(
             amount!,
-            style: const TextStyle(fontSize: 16),
+            style: AppTextStyles.h1,
           ),
           Text(
             time!,
-            style: const TextStyle(fontSize: 16),
+            style: AppTextStyles.h1,
           ),
         ],
       ),

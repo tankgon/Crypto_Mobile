@@ -1,7 +1,9 @@
 // ignore_for_file: depend_on_referenced_packages
 
 import 'package:flutter/material.dart';
-import 'package:movie_flutter/src/modules/chart/components/chart/order_book_sale.dart';
+import 'package:movie_flutter/src/config/themes/app_colors.dart';
+import 'package:movie_flutter/src/config/themes/app_text_styles.dart';
+import 'package:movie_flutter/src/modules/chart/components/chart_order_book/order_book_sale.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:intl/intl.dart';
 import '../../../../models/chart.dart';
@@ -65,28 +67,28 @@ class ContentChart extends StatelessWidget {
                         padding: EdgeInsets.only(bottom: 16),
                         child: Text(
                           'Bên mua',
-                          style: TextStyle(fontSize: 18, color: Colors.white30),
+                          style: AppTextStyles.h1C,
                         ),
                       ),
                       OrderBookBuy(
                         amount: '52.31',
                         mass: '20',
-                        color: Colors.greenAccent,
+                        color: AppColors.green,
                       ),
                       OrderBookBuy(
                         amount: '52.31',
                         mass: '20',
-                        color: Colors.greenAccent,
+                        color: AppColors.green,
                       ),
                       OrderBookBuy(
                         amount: '52.31',
                         mass: '20',
-                        color: Colors.greenAccent,
+                        color: AppColors.green,
                       ),
                       OrderBookBuy(
                         amount: '52.31',
                         mass: '20',
-                        color: Colors.greenAccent,
+                        color: AppColors.green,
                       ),
                     ],
                   ),
@@ -103,23 +105,23 @@ class ContentChart extends StatelessWidget {
                         padding: EdgeInsets.only(bottom: 16),
                         child: Text(
                           'Bên bán',
-                          style: TextStyle(fontSize: 18, color: Colors.white30),
+                          style: AppTextStyles.h1C,
                         ),
                       ),
                       OrderBookSale(
                         amount: '52.31',
                         mass: '20',
-                        color: Colors.redAccent,
+                        color: AppColors.red,
                       ),
                       OrderBookSale(
                         amount: '52.31',
                         mass: '20',
-                        color: Colors.redAccent,
+                        color: AppColors.red,
                       ),
                       OrderBookSale(
                         amount: '52.31',
                         mass: '20',
-                        color: Colors.redAccent,
+                        color: AppColors.red,
                       ),
                     ],
                   ),

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:movie_flutter/src/config/themes/app_colors.dart';
+import 'package:movie_flutter/src/config/themes/app_text_styles.dart';
 
 class ItemInformation extends StatelessWidget {
   const ItemInformation({
@@ -19,8 +21,8 @@ class ItemInformation extends StatelessWidget {
       height: size.height / 14,
       decoration: BoxDecoration(
           color: const Color.fromARGB(16, 33, 149, 243),
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: Colors.white30)),
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: AppColors.white54)),
       child: Row(
         children: [
           Expanded(
@@ -28,14 +30,14 @@ class ItemInformation extends StatelessWidget {
               padding: const EdgeInsets.only(left: 16.0),
               child: Text(
                 label!,
-                style: const TextStyle(color: Colors.white54, fontSize: 20),
+                style: AppTextStyles.h2C,
               ),
             ),
           ),
           Container(
             width: 1,
             height: 40,
-            color: Colors.white38,
+            color: AppColors.white54,
           ),
           Expanded(
             child: Container(
@@ -43,7 +45,7 @@ class ItemInformation extends StatelessWidget {
                 padding: const EdgeInsets.only(right: 16.0),
                 child: Text(
                   money!,
-                  style: const TextStyle(fontSize: 20),
+                  style: AppTextStyles.h2,
                 )),
           )
         ],

@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:movie_flutter/src/config/themes/app_colors.dart';
+import 'package:movie_flutter/src/config/themes/app_text_styles.dart';
 import 'components/background_widget.dart';
 import 'components/stock_item.dart';
 
-class MovieDetailPage extends StatefulWidget {
-  const MovieDetailPage({Key? key}) : super(key: key);
+class Stock extends StatefulWidget {
+  const Stock({Key? key}) : super(key: key);
 
   @override
-  State<MovieDetailPage> createState() => _MovieDetailPageState();
+  State<Stock> createState() => _StockPageState();
 }
 
-class _MovieDetailPageState extends State<MovieDetailPage>
-    with SingleTickerProviderStateMixin {
+class _StockPageState extends State<Stock> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
@@ -24,21 +25,14 @@ class _MovieDetailPageState extends State<MovieDetailPage>
           child: Stack(
         children: [
           BackGroundWidget(size: size),
-          Container(
-            height: size.height,
-            decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                    colors: [Colors.black87, Color(0xff131e30)],
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter)),
-          ),
+          Container(height: size.height, decoration: AppColors.gradientMain),
           Container(
             margin: const EdgeInsets.only(top: 8),
             child: ElevatedButton(
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
                   shape: const CircleBorder(),
-                  backgroundColor: Colors.transparent,
+                  backgroundColor: AppColors.none,
                 ),
                 child: Stack(
                   children: [
@@ -50,12 +44,12 @@ class _MovieDetailPageState extends State<MovieDetailPage>
                     Container(
                       margin: const EdgeInsets.only(top: 16, left: 20),
                       decoration: BoxDecoration(
-                        color: Colors.blue,
+                        color: AppColors.blue,
                         borderRadius: BorderRadius.circular(50),
                       ),
                       child: const Icon(
                         Icons.navigate_next_outlined,
-                        color: Colors.white,
+                        color: AppColors.white,
                         size: 20,
                       ),
                     )
@@ -70,13 +64,13 @@ class _MovieDetailPageState extends State<MovieDetailPage>
                 children: const [
                   Text(
                     'BitBank Main',
-                    style: TextStyle(fontSize: 16),
+                    style: AppTextStyles.h1,
                   ),
                   Padding(
                     padding: EdgeInsets.only(left: 8),
                     child: Icon(
                       Icons.keyboard_arrow_down_sharp,
-                      color: Colors.white,
+                      color: AppColors.white,
                       size: 20,
                     ),
                   )
@@ -127,7 +121,7 @@ class _MovieDetailPageState extends State<MovieDetailPage>
         padding: const EdgeInsets.all(24),
         child: Text(
           content,
-          style: const TextStyle(color: Colors.white, fontSize: 20),
+          style: AppTextStyles.h2,
         ));
   }
 }

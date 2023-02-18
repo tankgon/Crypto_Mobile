@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:movie_flutter/src/config/themes/app_colors.dart';
+import 'package:movie_flutter/src/config/themes/app_text_styles.dart';
 
 import '../../../widgets/gradient_button.dart';
 import '../../../widgets/input_number.dart';
@@ -46,11 +48,8 @@ class _BottonSheet extends State<BottonSheet>
                       tabs: const [Tab(text: 'Admit'), Tab(text: 'Withdraw')],
                       controller: _tabControl,
                       indicatorSize: TabBarIndicatorSize.label,
-                      labelStyle:
-                          const TextStyle(color: Colors.white, fontSize: 20),
-                      unselectedLabelStyle:
-                          const TextStyle(color: Colors.black, fontSize: 20),
-                      indicatorColor: Colors.white,
+                      labelStyle: AppTextStyles.h2,
+                      indicatorColor: AppColors.white,
                     ),
                   ),
                   Expanded(
@@ -65,8 +64,7 @@ class _BottonSheet extends State<BottonSheet>
                                 label: "Xác nhận Token",
                               ),
                               TextNumber(
-                                lable: 'Số lượng nạp',
-                              ),
+                                  lable: 'Số lượng nạp', suffix: '.000 VND'),
                               GradientButton(
                                 name: 'Nạp',
                               ),
@@ -81,8 +79,7 @@ class _BottonSheet extends State<BottonSheet>
                                 label: "Xác nhận Token",
                               ),
                               TextNumber(
-                                lable: 'Số lượng rút',
-                              ),
+                                  lable: 'Số lượng rút', suffix: '.000 VND'),
                               GradientButton(
                                 name: 'Rút',
                               ),

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:movie_flutter/src/config/themes/app_colors.dart';
+import 'package:movie_flutter/src/config/themes/app_text_styles.dart';
 
 import 'item_history.dart';
 
@@ -21,26 +23,26 @@ class History extends StatelessWidget {
           children: const [
             Text(
               'Giá',
-              style: TextStyle(color: Colors.white54, fontSize: 16),
+              style: AppTextStyles.h1C,
             ),
             Text(
               'Trạng thái',
-              style: TextStyle(color: Colors.white54, fontSize: 16),
+              style: AppTextStyles.h1C,
             ),
             Text(
               'SL đầu',
-              style: TextStyle(color: Colors.white54, fontSize: 16),
+              style: AppTextStyles.h1C,
             ),
             Text(
               'Thời gian',
-              style: TextStyle(color: Colors.white54, fontSize: 16),
+              style: AppTextStyles.h1C,
             ),
           ],
         ),
         Container(
           width: size.width,
           height: 1,
-          color: Colors.white54,
+          color: AppColors.white54,
           margin: const EdgeInsets.symmetric(vertical: 8),
         ),
         const ItemHistory(
@@ -48,49 +50,49 @@ class History extends StatelessWidget {
           price: '50',
           state: 'mở',
           time: '20.16',
-          color: Colors.greenAccent,
+          color: AppColors.green,
         ),
         const ItemHistory(
           amount: '20',
           price: '50',
           state: 'mở',
           time: '20.16',
-          color: Colors.redAccent,
+          color: AppColors.red,
         ),
         const ItemHistory(
           amount: '20',
           price: '50',
           state: 'đóng',
           time: '20.16',
-          color: Colors.greenAccent,
+          color: AppColors.green,
         ),
         const ItemHistory(
           amount: '20',
           price: '50',
           state: 'mở',
           time: '20.16',
-          color: Colors.greenAccent,
+          color: AppColors.green,
         ),
         const ItemHistory(
           amount: '20',
           price: '50',
           state: 'mở',
           time: '20.16',
-          color: Colors.greenAccent,
+          color: AppColors.green,
         ),
         const ItemHistory(
           amount: '20',
           price: '50',
           state: 'đóng',
           time: '20.16',
-          color: Colors.redAccent,
+          color: AppColors.red,
         ),
         const ItemHistory(
           amount: '20',
           price: '50',
           state: 'mở',
           time: '20.16',
-          color: Colors.greenAccent,
+          color: AppColors.green,
         ),
       ]),
     ));

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:movie_flutter/src/config/themes/app_colors.dart';
 import 'package:movie_flutter/src/modules/profile/profile.dart';
 import 'package:movie_flutter/src/modules/stock/stock.dart';
-import 'package:movie_flutter/src/modules/selectCinema/select_cinema_page.dart';
 import 'package:movie_flutter/src/modules/setting/setting.dart';
 import '../../widgets/gradien_text.dart';
 import '../../widgets/gradient_icon.dart';
@@ -17,18 +17,18 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int currentTab = 0;
+
   final List<Widget> screents = [
-    const MovieDetailPage(),
-    SelectCinemaPage(),
-    const MovieDetailPage(),
-    SelectCinemaPage(),
+    const Chart(),
+    const Setting(),
+    const Profile(),
+    const Stock(),
   ];
 
   final PageStorageBucket bucket = PageStorageBucket();
-  Widget currentScreent = const MovieDetailPage();
+  Widget currentScreent = const Stock();
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: PageStorage(
         bucket: bucket,
@@ -39,7 +39,6 @@ class _HomeState extends State<Home> {
         onPressed: () {
           showModalBottomSheet(
               isScrollControlled: false,
-              barrierColor: Colors.white24,
               context: context,
               builder: (BuildContext context) {
                 return const BottonSheet();
@@ -50,7 +49,7 @@ class _HomeState extends State<Home> {
       bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(),
         notchMargin: 10,
-        color: Colors.black,
+        color: AppColors.black,
         child: SizedBox(
           height: 60,
           child: Row(
@@ -63,7 +62,7 @@ class _HomeState extends State<Home> {
                     minWidth: 40,
                     onPressed: () {
                       setState(() {
-                        currentScreent = const MovieDetailPage();
+                        currentScreent = const Stock();
                         currentTab = 0;
                       });
                     },
@@ -71,40 +70,19 @@ class _HomeState extends State<Home> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         currentTab == 0
-                            ? const GradientIcon(
-                                Icons.account_tree_outlined,
-                                30,
-                                LinearGradient(
-                                  colors: <Color>[
-                                    Color(0xff8AD4EC),
-                                    Color(0xffEF96FF),
-                                    Color(0xffFF56A9),
-                                    Color(0xffFFAA6C),
-                                  ],
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
-                                ),
-                              )
+                            ? const GradientIcon(Icons.account_tree_outlined,
+                                30, AppColors.gradienIcon)
                             : const Icon(
                                 Icons.account_tree_outlined,
-                                color: Colors.grey,
+                                color: AppColors.grey,
                               ),
                         currentTab == 0
-                            ? const GradientText(
-                                'Stock',
-                                gradient: LinearGradient(
-                                  colors: [
-                                    Color(0xff8AD4EC),
-                                    Color(0xffEF96FF),
-                                    Color(0xffFF56A9),
-                                    Color(0xffFFAA6C),
-                                  ],
-                                ),
-                              )
+                            ? const GradientText('Stock',
+                                gradient: AppColors.gradienIcon)
                             : const Text(
                                 'Stock',
                                 style: TextStyle(
-                                  color: Colors.grey,
+                                  color: AppColors.grey,
                                 ),
                               )
                       ],
@@ -123,39 +101,18 @@ class _HomeState extends State<Home> {
                       children: [
                         currentTab == 1
                             ? const GradientIcon(
-                                Icons.bar_chart,
-                                30,
-                                LinearGradient(
-                                  colors: <Color>[
-                                    Color(0xff8AD4EC),
-                                    Color(0xffEF96FF),
-                                    Color(0xffFF56A9),
-                                    Color(0xffFFAA6C),
-                                  ],
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
-                                ),
-                              )
+                                Icons.bar_chart, 30, AppColors.gradienIcon)
                             : const Icon(
                                 Icons.bar_chart,
-                                color: Colors.grey,
+                                color: AppColors.grey,
                               ),
                         currentTab == 1
-                            ? const GradientText(
-                                'Chart',
-                                gradient: LinearGradient(
-                                  colors: [
-                                    Color(0xff8AD4EC),
-                                    Color(0xffEF96FF),
-                                    Color(0xffFF56A9),
-                                    Color(0xffFFAA6C),
-                                  ],
-                                ),
-                              )
+                            ? const GradientText('Chart',
+                                gradient: AppColors.gradienIcon)
                             : const Text(
                                 'Chart',
                                 style: TextStyle(
-                                  color: Colors.grey,
+                                  color: AppColors.grey,
                                 ),
                               )
                       ],
@@ -178,40 +135,19 @@ class _HomeState extends State<Home> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         currentTab == 2
-                            ? const GradientIcon(
-                                Icons.verified_user_sharp,
-                                30,
-                                LinearGradient(
-                                  colors: <Color>[
-                                    Color(0xff8AD4EC),
-                                    Color(0xffEF96FF),
-                                    Color(0xffFF56A9),
-                                    Color(0xffFFAA6C),
-                                  ],
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
-                                ),
-                              )
+                            ? const GradientIcon(Icons.verified_user_sharp, 30,
+                                AppColors.gradienIcon)
                             : const Icon(
                                 Icons.verified_user_sharp,
-                                color: Colors.grey,
+                                color: AppColors.grey,
                               ),
                         currentTab == 2
-                            ? const GradientText(
-                                'Profile',
-                                gradient: LinearGradient(
-                                  colors: [
-                                    Color(0xff8AD4EC),
-                                    Color(0xffEF96FF),
-                                    Color(0xffFF56A9),
-                                    Color(0xffFFAA6C),
-                                  ],
-                                ),
-                              )
+                            ? const GradientText('Profile',
+                                gradient: AppColors.gradienIcon)
                             : const Text(
                                 'Profile',
                                 style: TextStyle(
-                                  color: Colors.grey,
+                                  color: AppColors.grey,
                                 ),
                               )
                       ],
@@ -229,40 +165,19 @@ class _HomeState extends State<Home> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         currentTab == 3
-                            ? const GradientIcon(
-                                Icons.settings_outlined,
-                                30,
-                                LinearGradient(
-                                  colors: <Color>[
-                                    Color(0xff8AD4EC),
-                                    Color(0xffEF96FF),
-                                    Color(0xffFF56A9),
-                                    Color(0xffFFAA6C),
-                                  ],
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
-                                ),
-                              )
+                            ? const GradientIcon(Icons.settings_outlined, 30,
+                                AppColors.gradienIcon)
                             : const Icon(
                                 Icons.settings_outlined,
-                                color: Colors.grey,
+                                color: AppColors.grey,
                               ),
                         currentTab == 3
-                            ? const GradientText(
-                                'Setting',
-                                gradient: LinearGradient(
-                                  colors: [
-                                    Color(0xff8AD4EC),
-                                    Color(0xffEF96FF),
-                                    Color(0xffFF56A9),
-                                    Color(0xffFFAA6C),
-                                  ],
-                                ),
-                              )
+                            ? const GradientText('Setting',
+                                gradient: AppColors.gradienIcon)
                             : const Text(
                                 'Setting',
                                 style: TextStyle(
-                                  color: Colors.grey,
+                                  color: AppColors.grey,
                                 ),
                               )
                       ],

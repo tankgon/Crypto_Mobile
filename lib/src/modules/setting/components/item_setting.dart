@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_flutter/src/config/themes/app_colors.dart';
 
 class ItemSetting extends StatelessWidget {
   const ItemSetting({Key? key, required this.name, required this.icon})
@@ -18,7 +19,7 @@ class ItemSetting extends StatelessWidget {
             children: [
               Icon(
                 icon,
-                color: Colors.white,
+                color: AppColors.white,
                 size: 30,
               ),
               Padding(
@@ -36,7 +37,7 @@ class ItemSetting extends StatelessWidget {
           ),
           const Icon(
             Icons.keyboard_arrow_right_outlined,
-            color: Colors.white,
+            color: AppColors.white,
             size: 30,
           ),
         ],

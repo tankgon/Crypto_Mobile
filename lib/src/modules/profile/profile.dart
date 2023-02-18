@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:movie_flutter/src/config/themes/app_colors.dart';
+import 'package:movie_flutter/src/config/themes/app_text_styles.dart';
 
 import '../../widgets/gradien_text.dart';
 import 'Components/item_information.dart';
@@ -28,23 +30,14 @@ class Profile extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: const [
-                    GradientText(
-                      'Thanh ne',
-                      style: TextStyle(fontSize: 30),
-                      gradient: LinearGradient(
-                        colors: [
-                          Color(0xff8AD4EC),
-                          Color(0xffEF96FF),
-                          Color(0xffFF56A9),
-                          Color(0xffFFAA6C),
-                        ],
-                      ),
-                    ),
+                    GradientText('Thanh ne',
+                        style: AppTextStyles.h3,
+                        gradient: AppColors.gradienIcon),
                     Padding(
                       padding: EdgeInsets.only(top: 16),
                       child: Text(
                         '0338091539',
-                        style: TextStyle(fontSize: 16, color: Colors.white54),
+                        style: AppTextStyles.h1C,
                       ),
                     )
                   ],
@@ -73,7 +66,7 @@ class Profile extends StatelessWidget {
                 border: TableBorder.all(
                     borderRadius: BorderRadius.circular(10),
                     width: 1.0,
-                    color: Colors.white38),
+                    color: AppColors.white54),
                 children: const [
                   TableRow(
                       decoration: BoxDecoration(
@@ -99,7 +92,7 @@ class Profile extends StatelessWidget {
                       child: Text(
                         "0",
                         textScaleFactor: 1.2,
-                        style: TextStyle(color: Colors.redAccent),
+                        style: TextStyle(color: AppColors.red),
                       ),
                     ),
                     Padding(
@@ -107,7 +100,7 @@ class Profile extends StatelessWidget {
                       child: Text(
                         "123123",
                         textScaleFactor: 1.2,
-                        style: TextStyle(color: Colors.greenAccent),
+                        style: TextStyle(color: AppColors.green),
                       ),
                     ),
                     Padding(
@@ -121,7 +114,7 @@ class Profile extends StatelessWidget {
                       child: Text(
                         "1234",
                         textScaleFactor: 1.2,
-                        style: TextStyle(color: Colors.redAccent),
+                        style: TextStyle(color: AppColors.red),
                       ),
                     ),
                     Padding(
@@ -129,7 +122,7 @@ class Profile extends StatelessWidget {
                       child: Text(
                         "1421432",
                         textScaleFactor: 1.2,
-                        style: TextStyle(color: Colors.greenAccent),
+                        style: TextStyle(color: AppColors.green),
                       ),
                     ),
                     Padding(
@@ -143,7 +136,7 @@ class Profile extends StatelessWidget {
                       child: Text(
                         "0",
                         textScaleFactor: 1.2,
-                        style: TextStyle(color: Colors.redAccent),
+                        style: TextStyle(color: AppColors.red),
                       ),
                     ),
                     Padding(
@@ -151,7 +144,7 @@ class Profile extends StatelessWidget {
                       child: Text(
                         "45",
                         textScaleFactor: 1.2,
-                        style: TextStyle(color: Colors.greenAccent),
+                        style: TextStyle(color: AppColors.green),
                       ),
                     ),
                     Padding(

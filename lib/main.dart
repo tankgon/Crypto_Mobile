@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:movie_flutter/src/config/themes/app_colors.dart';
 import 'package:movie_flutter/src/modules/home/home_page.dart';
 
 void main() {
@@ -13,19 +14,18 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-        statusBarColor: Colors.transparent,
-        statusBarBrightness: Brightness.dark));
+        statusBarColor: AppColors.none, statusBarBrightness: Brightness.dark));
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        // primarySwatch: Colors.blue,
         fontFamily: 'montserrat',
         // scaffoldBackgroundColor: const Color(0xff131e30),
-        scaffoldBackgroundColor: const Color(0xff020210),
+        scaffoldBackgroundColor: AppColors.main,
         textTheme: Theme.of(context)
             .textTheme
-            .apply(bodyColor: Colors.white, displayColor: Colors.white),
+            .apply(bodyColor: AppColors.white, displayColor: AppColors.white),
       ),
       home: const Home(),
     );

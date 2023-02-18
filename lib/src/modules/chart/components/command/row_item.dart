@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_flutter/src/config/themes/app_text_styles.dart';
 
 class RowItem extends StatelessWidget {
   const RowItem({
@@ -15,11 +16,11 @@ class RowItem extends StatelessWidget {
       children: [
         Text(
           name!,
-          style: const TextStyle(fontSize: 16),
+          style: AppTextStyles.h1,
         ),
         Text(
           number!,
-          style: const TextStyle(fontSize: 16),
+          style: AppTextStyles.h1,
         )
       ],
     );

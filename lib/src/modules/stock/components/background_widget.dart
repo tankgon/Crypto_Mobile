@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_flutter/src/config/themes/app_colors.dart';
 
 class BackGroundWidget extends StatelessWidget {
   const BackGroundWidget({
@@ -18,7 +19,7 @@ class BackGroundWidget extends StatelessWidget {
               image: DecorationImage(
                   image: AssetImage('images/18.png'), fit: BoxFit.cover),
               gradient: LinearGradient(
-                  colors: [Colors.transparent, Color(0xff131e30)],
+                  colors: [AppColors.none, Color(0xff131e30)],
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter)),
         ),
@@ -26,7 +27,7 @@ class BackGroundWidget extends StatelessWidget {
           height: 200,
           decoration: const BoxDecoration(
               gradient: LinearGradient(
-                  colors: [Color(0xff131e30), Colors.transparent],
+                  colors: [Color(0xff131e30), AppColors.none],
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter)),
         )

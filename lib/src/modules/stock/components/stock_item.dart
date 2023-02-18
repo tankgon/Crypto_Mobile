@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:movie_flutter/src/config/themes/app_colors.dart';
+import 'package:movie_flutter/src/config/themes/app_text_styles.dart';
 import 'package:movie_flutter/src/modules/stock/components/value_stock.dart';
 
 class StockItem extends StatelessWidget {
@@ -27,7 +29,7 @@ class StockItem extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
       margin: const EdgeInsets.only(top: 10, bottom: 10, left: 20, right: 20),
       decoration: BoxDecoration(
-          color: Colors.white10, borderRadius: BorderRadius.circular(16)),
+          color: AppColors.white10, borderRadius: BorderRadius.circular(10)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -35,11 +37,7 @@ class StockItem extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  name,
-                  style: const TextStyle(
-                      fontSize: 18, fontWeight: FontWeight.bold),
-                ),
+                Text(name, style: AppTextStyles.h1W),
                 Container(
                   width: size.width / 2.5,
                   padding: const EdgeInsets.only(top: 8),
@@ -48,15 +46,15 @@ class StockItem extends StatelessWidget {
                     children: [
                       ValueStock(
                         name: sann,
-                        color: Colors.yellowAccent,
+                        color: AppColors.yellow,
                       ),
                       ValueStock(
                         name: tran,
-                        color: Colors.blueAccent,
+                        color: AppColors.blue,
                       ),
                       ValueStock(
                         name: thamchieu,
-                        color: Colors.pinkAccent,
+                        color: AppColors.red,
                       ),
                     ],
                   ),
@@ -69,13 +67,11 @@ class StockItem extends StatelessWidget {
             children: [
               Text(
                 san,
-                style:
-                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style: AppTextStyles.h1W,
               ),
               Text(
                 khoiluong,
-                style:
-                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style: AppTextStyles.h1W,
               ),
             ],
           )
