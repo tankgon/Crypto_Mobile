@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:movie_flutter/src/config/themes/app_colors.dart';
+import 'package:movie_flutter/src/styles/themes/app_colors.dart';
 import 'package:movie_flutter/src/modules/profile/profile.dart';
 import 'package:movie_flutter/src/modules/stock/stock.dart';
 import 'package:movie_flutter/src/modules/setting/setting.dart';
-import '../../widgets/gradien_text.dart';
-import '../../widgets/gradient_icon.dart';
+import '../../styles/widgets/gradien_text.dart';
+import '../../styles/widgets/gradient_icon.dart';
 import '../chart/chart.dart';
 import 'components/botton_sheet.dart';
 
@@ -22,11 +22,11 @@ class _HomeState extends State<Home> {
     const Chart(),
     const Setting(),
     const Profile(),
-    const Stock(),
+    const StockPage(),
   ];
 
   final PageStorageBucket bucket = PageStorageBucket();
-  Widget currentScreent = const Stock();
+  Widget currentScreent = const StockPage();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,7 +62,7 @@ class _HomeState extends State<Home> {
                     minWidth: 40,
                     onPressed: () {
                       setState(() {
-                        currentScreent = const Stock();
+                        currentScreent = const StockPage();
                         currentTab = 0;
                       });
                     },

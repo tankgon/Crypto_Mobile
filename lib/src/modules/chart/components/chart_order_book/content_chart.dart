@@ -1,8 +1,8 @@
 // ignore_for_file: depend_on_referenced_packages
 
 import 'package:flutter/material.dart';
-import 'package:movie_flutter/src/config/themes/app_colors.dart';
-import 'package:movie_flutter/src/config/themes/app_text_styles.dart';
+import 'package:movie_flutter/src/styles/themes/app_colors.dart';
+import 'package:movie_flutter/src/styles/themes/app_text_styles.dart';
 import 'package:movie_flutter/src/modules/chart/components/chart_order_book/order_book_sale.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:intl/intl.dart';

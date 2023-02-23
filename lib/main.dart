@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:movie_flutter/src/config/themes/app_colors.dart';
+
 import 'package:movie_flutter/src/modules/home/home_page.dart';
+import 'package:movie_flutter/src/styles/themes/app_colors.dart';
 
 void main() {
   runApp(const MyApp());

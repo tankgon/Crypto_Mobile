@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:movie_flutter/src/config/themes/app_colors.dart';
-import 'package:movie_flutter/src/config/themes/app_text_styles.dart';
+import 'package:movie_flutter/src/styles/themes/app_colors.dart';
+import 'package:movie_flutter/src/styles/themes/app_text_styles.dart';
 import 'package:movie_flutter/src/modules/chart/components/chart_order_book/buy_page.dart';
 import 'package:movie_flutter/src/modules/chart/components/chart_order_book/sale_page.dart';
 
-import '../../../../widgets/gradien_text.dart';
+import '../../../../styles/widgets/gradien_text.dart';
 import '../../../stock/components/value_stock.dart';
 
 class HeaderChart extends StatelessWidget {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../config/themes/app_colors.dart';
+import '../../../../styles/themes/app_colors.dart';
 import 'item_market.dart';
 
 class Market extends StatelessWidget {

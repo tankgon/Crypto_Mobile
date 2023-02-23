@@ -1,0 +1,8 @@
+{
+    "dart.env": {},
+    "docker.commands.attach": "${containerCommand} exec -it ${containerId} ${shellCommand}",
+    "docker.commands.run": "${containerCommand} run --rm -d ${exposedPorts} ${tag}",
+    "dart.flutterDaemonLogFile": null,
+    "dart.flutterRunLogFile": null,
+    "dart.flutterRememberSelectedDevice": true
+}

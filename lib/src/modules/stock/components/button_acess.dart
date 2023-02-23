@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movie_flutter/src/config/themes/app_text_styles.dart';
+import 'package:movie_flutter/src/styles/themes/app_text_styles.dart';
 
 class ButtonAcess extends StatelessWidget {
   final String? name;

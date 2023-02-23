@@ -1,20 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:movie_flutter/src/config/themes/app_colors.dart';
-import 'package:movie_flutter/src/config/themes/app_text_styles.dart';
+import 'package:movie_flutter/src/config/api/crypto_repository.dart';
+import 'package:movie_flutter/src/models/stock_response.dart';
+import 'package:movie_flutter/src/modules/stock/get_stock_bloc.dart';
+import 'package:movie_flutter/src/styles/themes/app_colors.dart';
+import 'package:movie_flutter/src/styles/themes/app_text_styles.dart';
+import '../../models/stock.dart';
+
 import 'components/background_widget.dart';
 import 'components/stock_item.dart';
 
-class Stock extends StatefulWidget {
-  const Stock({Key? key}) : super(key: key);
-
+class StockPage extends StatefulWidget {
+  const StockPage({Key? key, this.nameStock}) : super(key: key);
+  final String? nameStock;
   @override
-  State<Stock> createState() => _StockPageState();
+  State<StockPage> createState() => _StockPageState();
 }
 
-class _StockPageState extends State<Stock> with SingleTickerProviderStateMixin {
+class _StockPageState extends State<StockPage>
+    with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
+    stocksBloc.getStocks();
   }
 
   @override
@@ -29,11 +36,12 @@ class _StockPageState extends State<Stock> with SingleTickerProviderStateMixin {
           Container(
             margin: const EdgeInsets.only(top: 8),
             child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () async {
+                  await CryptoRepository().getSession();
+                },
                 style: ElevatedButton.styleFrom(
-                  shape: const CircleBorder(),
-                  backgroundColor: AppColors.none,
-                ),
+                    shape: const CircleBorder(),
+                    backgroundColor: AppColors.none),
                 child: Stack(
                   children: [
                     CircleAvatar(
@@ -76,39 +84,22 @@ class _StockPageState extends State<Stock> with SingleTickerProviderStateMixin {
                   )
                 ],
               )),
-          Padding(
-            padding: const EdgeInsets.only(top: 60),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                StockItem(
-                  size: size,
-                  name: "ACB",
-                  san: "12.52 \$",
-                  sann: '12.32',
-                  tran: '20.43',
-                  thamchieu: '17.32',
-                  khoiluong: '231',
-                ),
-                StockItem(
-                  size: size,
-                  name: "TCB",
-                  san: "20.53 \$",
-                  sann: '16.12',
-                  tran: '22.45',
-                  thamchieu: '15.32',
-                  khoiluong: '312',
-                ),
-                StockItem(
-                  size: size,
-                  name: "VCB",
-                  san: "54.65 \$",
-                  sann: '22.32',
-                  tran: '25.43',
-                  thamchieu: '13.32',
-                  khoiluong: '32',
-                ),
-              ],
+          SizedBox(
+            height: size.height,
+            child: StreamBuilder<StockResponse>(
+              stream: stocksBloc.subject.stream,
+              builder: (context, AsyncSnapshot<StockResponse> snapshot) {
+                if (snapshot.hasData) {
+                  if (snapshot.data!.error.isNotEmpty) {
+                    return _buildErrorWidget(snapshot.data!.error);
+                  }
+                  return _buildListStock(size, snapshot.data!);
+                } else if (snapshot.hasError) {
+                  return _buildErrorWidget(snapshot.error.toString());
+                } else {
+                  return _buildLoadingWidget();
+                }
+              },
             ),
           ),
         ],
@@ -124,4 +115,55 @@ class _StockPageState extends State<Stock> with SingleTickerProviderStateMixin {
           style: AppTextStyles.h2,
         ));
   }
+}
+
+Widget _buildErrorWidget(String error) {
+  return Center(
+      child: Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      Text("Error occured: $error"),
+    ],
+  ));
+}
+
+Widget _buildLoadingWidget() {
+  return Align(
+      alignment: Alignment.center,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: const [
+          SizedBox(
+            height: 25.0,
+            width: 25.0,
+            child: CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+              strokeWidth: 4.0,
+            ),
+          )
+        ],
+      ));
+}
+
+Widget _buildListStock(Size size, StockResponse data) {
+  final List<Stock> stock = data.stock;
+  return Padding(
+      padding: const EdgeInsets.only(top: 60),
+      child: ListView.builder(
+          scrollDirection: Axis.vertical,
+          itemCount: stock.length - 1,
+          itemBuilder: (context, index) {
+            return GestureDetector(
+              onTap: () {},
+              child: StockItem(
+                size: size,
+                name: stock[index + 1].symbol,
+                san: "12.52 \$",
+                sann: '12.32',
+                tran: '20.43',
+                thamchieu: '17.32',
+                khoiluong: '231',
+              ),
+            );
+          }));
 }

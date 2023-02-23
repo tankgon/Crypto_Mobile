@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:movie_flutter/src/config/themes/app_colors.dart';
-import 'package:movie_flutter/src/config/themes/app_text_styles.dart';
+import 'package:movie_flutter/src/styles/themes/app_colors.dart';
+import 'package:movie_flutter/src/styles/themes/app_text_styles.dart';
 import '../../models/chart.dart';
 import 'components/chart_order_book/content_chart.dart';
 import 'components/chart_order_book/header_chart.dart';

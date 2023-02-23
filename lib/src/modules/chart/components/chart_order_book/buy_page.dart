@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:movie_flutter/src/config/themes/app_colors.dart';
-import 'package:movie_flutter/src/config/themes/app_text_styles.dart';
+import 'package:movie_flutter/src/styles/themes/app_colors.dart';
+import 'package:movie_flutter/src/styles/themes/app_text_styles.dart';
 
-import '../../../../widgets/input_number.dart';
-import '../../../../widgets/input_string.dart';
+import '../../../../styles/widgets/input_number.dart';
+import '../../../../styles/widgets/input_string.dart';
 
 class BuyPage extends StatelessWidget {
   const BuyPage({

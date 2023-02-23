@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:movie_flutter/src/config/themes/app_colors.dart';
-import 'package:movie_flutter/src/config/themes/app_text_styles.dart';
+import 'package:movie_flutter/src/styles/themes/app_colors.dart';
+import 'package:movie_flutter/src/styles/themes/app_text_styles.dart';
 
-import '../../widgets/gradien_text.dart';
+import '../../styles/widgets/gradien_text.dart';
 import 'Components/item_information.dart';
 
 class Profile extends StatelessWidget {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movie_flutter/src/config/themes/app_colors.dart';
+import 'package:movie_flutter/src/styles/themes/app_colors.dart';
 
 class ItemSetting extends StatelessWidget {
   const ItemSetting({Key? key, required this.name, required this.icon})
