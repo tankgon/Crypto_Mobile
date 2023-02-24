@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_flutter/src/config/api/crypto_repository.dart';
+import 'package:movie_flutter/src/features/home/widget/stock_item.dart';
 import 'package:movie_flutter/src/models/stock_response.dart';
 import 'package:movie_flutter/src/modules/stock/get_stock_bloc.dart';
 import 'package:movie_flutter/src/styles/themes/app_colors.dart';
@@ -7,7 +8,6 @@ import 'package:movie_flutter/src/styles/themes/app_text_styles.dart';
 import '../../models/stock.dart';
 
 import 'components/background_widget.dart';
-import 'components/stock_item.dart';
 
 class StockPage extends StatefulWidget {
   const StockPage({Key? key, this.nameStock}) : super(key: key);
@@ -146,24 +146,37 @@ Widget _buildLoadingWidget() {
 }
 
 Widget _buildListStock(Size size, StockResponse data) {
-  final List<Stock> stock = data.stock;
+  final List<Stock> stockInit = data.stock;
+  final List<Stock> stock = [
+    ...stockInit,
+    ...stockInit,
+    ...stockInit,
+    ...stockInit,
+  ];
+
   return Padding(
-      padding: const EdgeInsets.only(top: 60),
-      child: ListView.builder(
-          scrollDirection: Axis.vertical,
-          itemCount: stock.length - 1,
-          itemBuilder: (context, index) {
-            return GestureDetector(
-              onTap: () {},
-              child: StockItem(
-                size: size,
-                name: stock[index + 1].symbol,
-                san: "12.52 \$",
-                sann: '12.32',
-                tran: '20.43',
-                thamchieu: '17.32',
-                khoiluong: '231',
-              ),
-            );
-          }));
+    padding: const EdgeInsets.only(top: 60),
+    child: ListView.builder(
+      shrinkWrap: true,
+      scrollDirection: Axis.vertical,
+      itemCount: stock.length,
+      itemBuilder: (context, index) {
+        //TODO: Thanh implements lại hardcode check condition
+        if (stock[index].id == "stock_1") {
+          return const SizedBox.shrink();
+        }
+        return GestureDetector(
+          onTap: () {},
+          child: StockItem2(
+            size: size,
+            name: stock[index].symbol,
+          ),
+        );
+      },
+    ),
+    // child: ListView(
+    //     shrinkWrap: true,
+    //     children:
+    //         stock.map((e) => StockItem2(size: size, name: e.symbol)).toList()),
+  );
 }
