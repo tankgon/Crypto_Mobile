@@ -23,15 +23,15 @@ class ItemMarket extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            price!,
+            price ?? '',
             style: TextStyle(color: color, fontSize: 16),
           ),
           Text(
-            amount!,
+            amount ?? '',
             style: AppTextStyles.h1,
           ),
           Text(
-            time!,
+            time ?? '',
             style: AppTextStyles.h1,
           ),
         ],

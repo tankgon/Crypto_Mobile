@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:movie_flutter/src/network/models/response/get_current_report_res.dart';
-import 'package:movie_flutter/src/network/repositories/api_v1/sessions_repo.dart';
+import 'package:movie_flutter/src/network/repositories/api_v1/api_repo.dart';
 
 class SesionsRepoImpl implements SessionsRepo {
   SesionsRepoImpl();
@@ -17,7 +17,6 @@ class SesionsRepoImpl implements SessionsRepo {
     try {
       final Response response =
           await _dio.get("$baseUrl/api/v1/sessions/currentReport?symbol=$path");
-
       return GetCurrentReportRes.fromJson(response.data);
     } catch (e) {
       return null;

@@ -27,7 +27,7 @@ class ButtonAcess extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  name!,
+                  name ?? '',
                   style: AppTextStyles.h2,
                 ),
               ],

@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
             .textTheme
             .apply(bodyColor: AppColors.white, displayColor: AppColors.white),
       ),
-      home: const Home(),
+      home: const HomePage(),
     );
   }
 }

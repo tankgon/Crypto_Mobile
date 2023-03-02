@@ -1,18 +1,9 @@
-import 'package:movie_flutter/src/models/session_reponse.dart';
-
-class Stock extends SessionResData {
+class Stock {
   final String id;
   final String symbol;
   final String name;
 
-  Stock(this.id, this.name, this.symbol)
-      : super(
-            ceilPrice: '',
-            floorPrice: '',
-            refPrice: '',
-            totalVolume: '',
-            highestPrice: '',
-            lowestPrice: '');
+  Stock(this.id, this.name, this.symbol);
 
   Stock.fromJson(Map<String, dynamic> json)
       : id = json['stock_id'],

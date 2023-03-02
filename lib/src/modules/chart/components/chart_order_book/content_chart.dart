@@ -6,52 +6,69 @@ import 'package:movie_flutter/src/styles/themes/app_text_styles.dart';
 import 'package:movie_flutter/src/modules/chart/components/chart_order_book/order_book_sale.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:intl/intl.dart';
-import '../../../../models/chart.dart';
+import '../../../../network/models/response/get_kLineChart_report.dart';
+import '../../../../network/repositories/api_v1/kline_chart_repo.dart';
 import 'order_book_buy.dart';
 
 class ContentChart extends StatelessWidget {
   const ContentChart({
     Key? key,
     required this.size,
-    required List<ChartSampleData> chartDagta,
-  })  : _chartDagta = chartDagta,
-        super(key: key);
+    required this.symbolStock,
+  }) : super(key: key);
 
   final Size size;
-  final List<ChartSampleData> _chartDagta;
+  final String? symbolStock;
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         children: [
-          Container(
-            padding:
-                const EdgeInsets.only(right: 20, left: 10, bottom: 20, top: 20),
-            height: size.height / 2.5,
-            child: SfCartesianChart(
-              series: <CandleSeries>[
-                CandleSeries<ChartSampleData, DateTime>(
-                  dataSource: _chartDagta,
-                  xValueMapper: (ChartSampleData sales, _) => sales.x,
-                  lowValueMapper: (ChartSampleData sales, _) => sales.low,
-                  highValueMapper: (ChartSampleData sales, _) => sales.high,
-                  openValueMapper: (ChartSampleData sales, _) => sales.open,
-                  closeValueMapper: (ChartSampleData sales, _) => sales.close,
-                )
-              ],
-              plotAreaBorderWidth: 0,
-              primaryXAxis: DateTimeAxis(
-                dateFormat: DateFormat.MMM(),
-                majorGridLines: const MajorGridLines(width: 0),
-              ),
-              primaryYAxis: NumericAxis(
-                  majorGridLines: const MajorGridLines(width: 0.1),
-                  minimum: 0,
-                  maximum: 100,
-                  interval: 10,
-                  numberFormat: NumberFormat.simpleCurrency(decimalDigits: 0)),
-            ),
+          FutureBuilder(
+            future: KLineChartRepoImpl()
+                .getKLineChartReport(path: symbolStock.toString()),
+            builder: (context, snapshot) {
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.only(
+                        right: 10, left: 10, bottom: 20, top: 20),
+                    height: size.height / 2.5,
+                    width: size.width / 1.1,
+                    child: SfCartesianChart(
+                      series: <CandleSeries>[
+                        CandleSeries<KLineChartResData, DateTime>(
+                          dataSource: snapshot.data?.charts ?? [],
+                          xValueMapper: (KLineChartResData sales, _) => sales.x,
+                          lowValueMapper: (KLineChartResData sales, _) =>
+                              sales.low,
+                          highValueMapper: (KLineChartResData sales, _) =>
+                              sales.high,
+                          openValueMapper: (KLineChartResData sales, _) =>
+                              sales.open,
+                          closeValueMapper: (KLineChartResData sales, _) =>
+                              sales.close,
+                        )
+                      ],
+                      plotAreaBorderWidth: 0,
+                      primaryXAxis: DateTimeAxis(
+                        dateFormat: DateFormat.yMd(),
+                        majorGridLines: const MajorGridLines(width: 0),
+                      ),
+                      primaryYAxis: NumericAxis(
+                          majorGridLines: const MajorGridLines(width: 0.1),
+                          minimum: 0,
+                          maximum: 100,
+                          interval: 20,
+                          numberFormat:
+                              NumberFormat.simpleCurrency(decimalDigits: 0)),
+                    ),
+                  ),
+                ],
+              );
+            },
           ),
           SizedBox(
             width: size.width / 1.2,

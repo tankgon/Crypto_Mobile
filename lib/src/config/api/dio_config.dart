@@ -8,7 +8,7 @@ class DioConfig {
       "Content-Type": "application/json",
       'Accept': 'application/json',
       'X-Requested-With': 'XMLHttpRequest',
-      // 'responseType': ResponseType.json,
+      'responseType': ResponseType.json,
       "Authorization": '${UserRepository().postLogin()}',
     });
 }

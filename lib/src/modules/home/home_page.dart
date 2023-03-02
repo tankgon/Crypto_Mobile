@@ -1,29 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:movie_flutter/src/modules/profile/profile_page.dart';
 import 'package:movie_flutter/src/styles/themes/app_colors.dart';
-import 'package:movie_flutter/src/modules/profile/profile.dart';
-import 'package:movie_flutter/src/modules/stock/stock.dart';
-import 'package:movie_flutter/src/modules/setting/setting.dart';
+import 'package:movie_flutter/src/modules/wallet/wallet_page.dart';
+import 'package:movie_flutter/src/modules/stock/stock_page.dart';
+import 'package:movie_flutter/src/modules/setting/setting_page.dart';
 import '../../styles/widgets/gradien_text.dart';
 import '../../styles/widgets/gradient_icon.dart';
-import '../chart/chart.dart';
 import 'components/botton_sheet.dart';
 
-class Home extends StatefulWidget {
-  const Home({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
   @override
-  State<Home> createState() => _HomeState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _HomeState extends State<Home> {
+class _HomePageState extends State<HomePage> {
   int currentTab = 0;
-
-  final List<Widget> screents = [
-    const Chart(),
-    const Setting(),
-    const Profile(),
-    const StockPage(),
-  ];
 
   final PageStorageBucket bucket = PageStorageBucket();
   Widget currentScreent = const StockPage();
@@ -77,10 +70,10 @@ class _HomeState extends State<Home> {
                                 color: AppColors.grey,
                               ),
                         currentTab == 0
-                            ? const GradientText('Stock',
+                            ? const GradientText('Cổ phiếu',
                                 gradient: AppColors.gradienIcon)
                             : const Text(
-                                'Stock',
+                                'Cổ phiếu',
                                 style: TextStyle(
                                   color: AppColors.grey,
                                 ),
@@ -92,7 +85,7 @@ class _HomeState extends State<Home> {
                     minWidth: 40,
                     onPressed: () {
                       setState(() {
-                        currentScreent = const Chart();
+                        currentScreent = const ProfilePage();
                         currentTab = 1;
                       });
                     },
@@ -100,17 +93,17 @@ class _HomeState extends State<Home> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         currentTab == 1
-                            ? const GradientIcon(
-                                Icons.bar_chart, 30, AppColors.gradienIcon)
+                            ? const GradientIcon(Icons.supervised_user_circle,
+                                30, AppColors.gradienIcon)
                             : const Icon(
-                                Icons.bar_chart,
+                                Icons.supervised_user_circle,
                                 color: AppColors.grey,
                               ),
                         currentTab == 1
-                            ? const GradientText('Chart',
+                            ? const GradientText('Tài khoản',
                                 gradient: AppColors.gradienIcon)
                             : const Text(
-                                'Chart',
+                                'Tài khoản',
                                 style: TextStyle(
                                   color: AppColors.grey,
                                 ),
@@ -127,7 +120,7 @@ class _HomeState extends State<Home> {
                     minWidth: 40,
                     onPressed: () {
                       setState(() {
-                        currentScreent = const Profile();
+                        currentScreent = const WalletPage();
                         currentTab = 2;
                       });
                     },
@@ -135,17 +128,17 @@ class _HomeState extends State<Home> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         currentTab == 2
-                            ? const GradientIcon(Icons.verified_user_sharp, 30,
-                                AppColors.gradienIcon)
+                            ? const GradientIcon(Icons.account_balance_wallet,
+                                30, AppColors.gradienIcon)
                             : const Icon(
-                                Icons.verified_user_sharp,
+                                Icons.account_balance_wallet,
                                 color: AppColors.grey,
                               ),
                         currentTab == 2
-                            ? const GradientText('Profile',
+                            ? const GradientText('Ví',
                                 gradient: AppColors.gradienIcon)
                             : const Text(
-                                'Profile',
+                                'Ví',
                                 style: TextStyle(
                                   color: AppColors.grey,
                                 ),
@@ -157,7 +150,7 @@ class _HomeState extends State<Home> {
                     minWidth: 40,
                     onPressed: () {
                       setState(() {
-                        currentScreent = const Setting();
+                        currentScreent = const SettingPage();
                         currentTab = 3;
                       });
                     },
@@ -172,10 +165,10 @@ class _HomeState extends State<Home> {
                                 color: AppColors.grey,
                               ),
                         currentTab == 3
-                            ? const GradientText('Setting',
+                            ? const GradientText('Cài đặt',
                                 gradient: AppColors.gradienIcon)
                             : const Text(
-                                'Setting',
+                                'Cài đặt',
                                 style: TextStyle(
                                   color: AppColors.grey,
                                 ),

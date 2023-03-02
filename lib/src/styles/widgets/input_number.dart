@@ -29,7 +29,7 @@ class TextNumber extends StatelessWidget {
             hintStyle: AppTextStyles.h1,
             labelText: lable,
             labelStyle: AppTextStyles.h1CG,
-            suffix: Text(suffix!),
+            suffix: Text(suffix ?? ''),
             helperMaxLines: 1,
             focusedBorder: InputBorder.none),
       ),

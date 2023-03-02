@@ -19,6 +19,7 @@ class AppColors {
   static const green = Colors.greenAccent;
   static const yellow = Colors.yellowAccent;
   static const blue = Colors.blueAccent;
+  static const pink = Colors.pinkAccent;
   static const white = Colors.white;
   static const white54 = Colors.white54;
   static const white70 = Colors.white70;

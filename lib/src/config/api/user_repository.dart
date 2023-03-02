@@ -18,7 +18,6 @@ class UserRepository {
     try {
       final response = await _dio.post(postLoginUrl, data: data);
       final res = LoginRes.fromMap(response.data);
-      // print("Thanh LOG ${res.data?.token}");
       return res;
     } catch (error) {
       throw UnimplementedError();

@@ -22,19 +22,19 @@ class ItemHistory extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            price!,
+            price ?? '',
             style: TextStyle(color: color, fontSize: 16),
           ),
           Text(
-            state!,
+            state ?? '',
             style: TextStyle(color: color, fontSize: 16),
           ),
           Text(
-            amount!,
+            amount ?? '',
             style: TextStyle(color: color, fontSize: 16),
           ),
           Text(
-            time!,
+            time ?? '',
             style: TextStyle(color: color, fontSize: 16),
           ),
         ],

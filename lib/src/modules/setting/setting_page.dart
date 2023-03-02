@@ -5,8 +5,8 @@ import 'package:movie_flutter/src/styles/themes/app_text_styles.dart';
 import '../stock/components/background_widget.dart';
 import 'components/item_setting.dart';
 
-class Setting extends StatelessWidget {
-  const Setting({super.key});
+class SettingPage extends StatelessWidget {
+  const SettingPage({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -17,11 +17,11 @@ class OrderBookBuy extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            mass!,
+            mass ?? '',
             style: AppTextStyles.h1,
           ),
           Text(
-            amount!,
+            amount ?? '',
             style: TextStyle(color: color, fontSize: 16),
           ),
         ],

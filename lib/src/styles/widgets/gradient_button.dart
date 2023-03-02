@@ -20,7 +20,7 @@ class GradientButton extends StatelessWidget {
         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
         shape: const StadiumBorder(),
         child: Text(
-          name!,
+          name ?? '',
           style: AppTextStyles.h2W,
         ),
         onPressed: () {},

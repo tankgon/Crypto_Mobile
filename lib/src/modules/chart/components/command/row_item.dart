@@ -15,11 +15,11 @@ class RowItem extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          name!,
+          name ?? '',
           style: AppTextStyles.h1,
         ),
         Text(
-          number!,
+          number ?? '',
           style: AppTextStyles.h1,
         )
       ],

@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:movie_flutter/src/config/api/crypto_repository.dart';
-import 'package:movie_flutter/src/features/home/widget/stock_item.dart';
 import 'package:movie_flutter/src/models/stock_response.dart';
+import 'package:movie_flutter/src/modules/chart/chart_page.dart';
 import 'package:movie_flutter/src/modules/stock/get_stock_bloc.dart';
 import 'package:movie_flutter/src/styles/themes/app_colors.dart';
 import 'package:movie_flutter/src/styles/themes/app_text_styles.dart';
 import '../../models/stock.dart';
-
 import 'components/background_widget.dart';
+import 'components/stock_item.dart';
 
 class StockPage extends StatefulWidget {
   const StockPage({Key? key, this.nameStock}) : super(key: key);
@@ -36,9 +35,7 @@ class _StockPageState extends State<StockPage>
           Container(
             margin: const EdgeInsets.only(top: 8),
             child: ElevatedButton(
-                onPressed: () async {
-                  await CryptoRepository().getSession();
-                },
+                onPressed: () {},
                 style: ElevatedButton.styleFrom(
                     shape: const CircleBorder(),
                     backgroundColor: AppColors.none),
@@ -147,36 +144,31 @@ Widget _buildLoadingWidget() {
 
 Widget _buildListStock(Size size, StockResponse data) {
   final List<Stock> stockInit = data.stock;
-  final List<Stock> stock = [
-    ...stockInit,
-    ...stockInit,
-    ...stockInit,
-    ...stockInit,
-  ];
-
   return Padding(
     padding: const EdgeInsets.only(top: 60),
     child: ListView.builder(
-      shrinkWrap: true,
       scrollDirection: Axis.vertical,
-      itemCount: stock.length,
+      itemCount: stockInit.length,
       itemBuilder: (context, index) {
-        //TODO: Thanh implements lại hardcode check condition
-        if (stock[index].id == "stock_1") {
+        if (stockInit[index].symbol == "VND") {
           return const SizedBox.shrink();
         }
         return GestureDetector(
-          onTap: () {},
-          child: StockItem2(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ChartPage(
+                      symbolStock: stockInit[index].symbol,
+                      nameStock: stockInit[index].name)),
+            );
+          },
+          child: StockItem(
             size: size,
-            name: stock[index].symbol,
+            name: stockInit[index].symbol,
           ),
         );
       },
     ),
-    // child: ListView(
-    //     shrinkWrap: true,
-    //     children:
-    //         stock.map((e) => StockItem2(size: size, name: e.symbol)).toList()),
   );
 }

@@ -3,10 +3,10 @@ import 'package:movie_flutter/src/styles/themes/app_colors.dart';
 import 'package:movie_flutter/src/styles/themes/app_text_styles.dart';
 
 import '../../styles/widgets/gradien_text.dart';
-import 'Components/item_information.dart';
+import 'Components/item_wallet.dart';
 
-class Profile extends StatelessWidget {
-  const Profile({super.key});
+class WalletPage extends StatelessWidget {
+  const WalletPage({super.key});
 
   @override
   Widget build(BuildContext context) {

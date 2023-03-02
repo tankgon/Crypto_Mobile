@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
-import 'package:movie_flutter/src/models/session_reponse.dart';
 import 'package:movie_flutter/src/models/stock_response.dart';
 
 class CryptoRepository {
@@ -22,18 +21,6 @@ class CryptoRepository {
       return StockResponse.fromJson(response.data);
     } catch (error) {
       return StockResponse.withError("$error");
-    }
-  }
-
-  Future<SessionRes> getSession() async {
-    var params = {"language": "en-US", 'symbol': 'GON'};
-    try {
-      Response response =
-          await _dio.get(getSessionUrl, queryParameters: params);
-      print(response.data['data']);
-      return SessionRes.fromMap(response.data);
-    } catch (error) {
-      throw UnimplementedError();
     }
   }
 }
