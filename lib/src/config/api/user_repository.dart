@@ -8,8 +8,8 @@ class UserRepository {
     ..options = BaseOptions(baseUrl: mainUrl, headers: {
       "Content-Type": "application/json",
     });
-  final String username = 'votuan';
-  final String password = '123456789';
+  final String username = 'thanhne1';
+  final String password = 'thanhne1';
   var postLoginUrl = '$mainUrl/api/v1/auth/login';
   var logger = Logger();
 

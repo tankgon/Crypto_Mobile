@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:movie_flutter/src/styles/themes/app_colors.dart';
 
 class ItemSetting extends StatelessWidget {
-  const ItemSetting({Key? key, required this.name, required this.icon})
+  const ItemSetting(
+      {Key? key, required this.name, required this.icon, required this.size})
       : super(key: key);
   final String name;
   final IconData icon;
+  final Size size;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,7 @@ class ItemSetting extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 16),
                 child: SizedBox(
-                  width: 250,
+                  width: size.width / 1.8,
                   child: Text(
                     name,
                     style: const TextStyle(

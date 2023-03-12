@@ -2,17 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:movie_flutter/src/styles/themes/app_colors.dart';
 import 'package:movie_flutter/src/styles/themes/app_text_styles.dart';
 
+import '../../../../config/api/crypto_repository.dart';
 import '../../../../styles/widgets/input_number.dart';
 import '../../../../styles/widgets/input_string.dart';
 
 class BuyPage extends StatelessWidget {
   const BuyPage({
     Key? key,
+    this.symbolStock,
   }) : super(key: key);
+
+  final String? symbolStock;
 
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
+    final price = TextEditingController();
+    final amount = TextEditingController();
     return Scaffold(
       body: SafeArea(
           child: SingleChildScrollView(
@@ -58,8 +64,8 @@ class BuyPage extends StatelessWidget {
                     Expanded(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
-                        children: const [
-                          Padding(
+                        children: [
+                          const Padding(
                             padding: EdgeInsets.only(left: 12.0, right: 8),
                             child: Icon(
                               Icons.location_on_outlined,
@@ -67,7 +73,7 @@ class BuyPage extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            'BTC',
+                            symbolStock.toString(),
                             style: AppTextStyles.h2W,
                           )
                         ],
@@ -89,12 +95,18 @@ class BuyPage extends StatelessWidget {
                     const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
                 height: size.height / 1.7,
                 child: Column(
-                  children: const [
-                    InputToken(
+                  children: [
+                    const InputToken(
                       label: "Xác nhận Token",
                     ),
-                    TextNumber(lable: 'Số lượng mua', suffix: '.000 VND'),
-                    TextNumber(lable: 'Khối lượng mua', suffix: ''),
+                    TextNumber(
+                        controller: price,
+                        lable: 'Số lượng mua',
+                        suffix: '.000 VND'),
+                    TextNumber(
+                        controller: amount,
+                        lable: 'Khối lượng mua',
+                        suffix: ''),
                   ],
                 ),
               ),
@@ -107,11 +119,16 @@ class BuyPage extends StatelessWidget {
                             horizontal: 24, vertical: 30),
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                              backgroundColor: AppColors.green,
+                              backgroundColor: AppColors.originGreen,
                               shape: const RoundedRectangleBorder(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(10)))),
-                          onPressed: () {},
+                          onPressed: () {
+                            CryptoRepository().postCreateOrderAsk(
+                                symbolStock,
+                                int.tryParse(price.toString()),
+                                int.tryParse(amount.toString()));
+                          },
                           child: const Padding(
                             padding: EdgeInsets.all(16.0),
                             child: Text(

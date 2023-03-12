@@ -10,6 +10,7 @@ class InputToken extends StatelessWidget {
 
   final String? label;
 
+
   @override
   Widget build(BuildContext context) {
     return Container(

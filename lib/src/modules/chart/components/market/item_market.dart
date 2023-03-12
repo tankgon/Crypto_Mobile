@@ -9,12 +9,14 @@ class ItemMarket extends StatelessWidget {
     this.amount,
     this.time,
     this.color,
+    required this.size,
   }) : super(key: key);
   final String? price;
   final String? state;
   final String? amount;
   final String? time;
   final Color? color;
+  final Size size;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -22,13 +24,21 @@ class ItemMarket extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            price ?? '',
-            style: TextStyle(color: color, fontSize: 16),
-          ),
-          Text(
-            amount ?? '',
-            style: AppTextStyles.h1,
+          SizedBox(
+            width: size.width / 2.15,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  price ?? '',
+                  style: TextStyle(color: color, fontSize: 16),
+                ),
+                Text(
+                  amount ?? '',
+                  style: AppTextStyles.h1,
+                ),
+              ],
+            ),
           ),
           Text(
             time ?? '',

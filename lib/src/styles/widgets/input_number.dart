@@ -8,9 +8,11 @@ class TextNumber extends StatelessWidget {
     Key? key,
     this.lable,
     this.suffix,
+    this.controller,
   }) : super(key: key);
   final String? lable;
   final String? suffix;
+  final TextEditingController? controller;
   @override
   Widget build(BuildContext context) {
     // final Size size = MediaQuery.of(context).size;
@@ -21,6 +23,7 @@ class TextNumber extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           border: Border.all(color: AppColors.grey)),
       child: TextFormField(
+        controller: controller,
         keyboardType: const TextInputType.numberWithOptions(decimal: true),
         maxLengthEnforcement: MaxLengthEnforcement.enforced,
         decoration: InputDecoration(

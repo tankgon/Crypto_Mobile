@@ -22,8 +22,8 @@ class SettingPage extends StatelessWidget {
         child: SizedBox(
           width: size.width / 1.2,
           child: Column(
-            children: const [
-              Padding(
+            children: [
+              const Padding(
                 padding: EdgeInsets.symmetric(vertical: 40),
                 child: Text(
                   'Settings',
@@ -31,26 +31,32 @@ class SettingPage extends StatelessWidget {
                 ),
               ),
               ItemSetting(
+                size: size,
                 name: 'Account',
                 icon: Icons.account_circle_rounded,
               ),
               ItemSetting(
+                size: size,
                 name: 'Share My Public Address',
                 icon: Icons.location_on_outlined,
               ),
               ItemSetting(
+                size: size,
                 name: 'View on Etherscan',
                 icon: Icons.remove_red_eye_outlined,
               ),
               ItemSetting(
+                size: size,
                 name: 'Preferences',
                 icon: Icons.settings_suggest_outlined,
               ),
               ItemSetting(
+                size: size,
                 name: 'Get Help',
                 icon: Icons.headphones_outlined,
               ),
               ItemSetting(
+                size: size,
                 name: 'Send Feed back',
                 icon: Icons.send,
               ),
@@ -63,7 +69,8 @@ class SettingPage extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.only(bottom: 40),
           width: size.width / 1.2,
-          child: const ItemSetting(
+          child: ItemSetting(
+            size: size,
             name: 'Logout',
             icon: Icons.logout,
           ),

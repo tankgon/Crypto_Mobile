@@ -14,6 +14,8 @@ class AppColors {
   static const darkBackground = Color(0xFF151D3B);
   static const darkerBackground = Color(0xFF0B0F2F);
 
+  static const originGreen = Colors.green;
+  static const originRed = Colors.red;
   static const orange = Colors.deepOrange;
   static const red = Colors.redAccent;
   static const green = Colors.greenAccent;

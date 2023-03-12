@@ -100,13 +100,10 @@ class _ChartPageState extends State<ChartPage>
                     child: TabBarView(
                       controller: _chartPageController,
                       children: [
-                        ContentChart(
-                          size: size,
-                          symbolStock: symbolStock,
-                        ),
-                        Command(size: size),
-                        History(size: size),
-                        Market(size: size)
+                        ContentChart(size: size, symbolStock: symbolStock),
+                        Command(size: size, symbolStock: symbolStock),
+                        History(size: size, symbolStock: symbolStock),
+                        MarketWidget(size: size, symbolStock: symbolStock)
                       ],
                     ),
                   )
