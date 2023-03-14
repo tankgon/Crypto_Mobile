@@ -55,7 +55,8 @@ class HeaderChart extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => BuyPage(symbolStock: symbolStock)));
+                                builder: (context) =>
+                                    BuyPage(symbolStock: symbolStock)));
                       },
                       child: const Padding(
                         padding: EdgeInsets.all(16.0),
@@ -77,7 +78,8 @@ class HeaderChart extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const SalePage()));
+                                builder: (context) =>
+                                    SalePage(symbolStock: symbolStock)));
                       },
                       child: const Padding(
                         padding: EdgeInsets.all(16.0),

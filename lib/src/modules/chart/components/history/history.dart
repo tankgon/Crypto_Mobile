@@ -129,10 +129,10 @@ Widget _buildListHistory(Size size, ListOrderResponse data) {
         size: size,
         amount: stockInit[index].originalCoinAmount,
         price: stockInit[index].pricePerUnit,
-        state: stockInit[index].state == 'enabled' ? 'mở' : 'thành công',
+        state: stockInit[index].state == 'enabled' ? 'đang mở' : 'thành công',
         time: DateFormat.MEd()
             .format(stockInit[index].createdAt ?? DateTime.now()),
-        color: stockInit[index].type == 'ask' ? AppColors.green : AppColors.red,
+        color: stockInit[index].type == 'bid' ? AppColors.green : AppColors.red,
       );
     },
   );

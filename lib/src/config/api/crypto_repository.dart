@@ -82,14 +82,25 @@ class CryptoRepository {
     await _dio.post(postCancleOrderUrl, data: data);
   }
 
-  Future<void> postCreateOrderAsk(
+  Future<void> postCreateOrderBid(
+      String? symbol, int? price, int? amount) async {
+    var data = {
+      "price": price,
+      "amount": amount,
+      "type": "bid",
+      "symbol": symbol,
+    };
+    await _dio.post(postCreateOrderUrl, data: data);
+  }
+
+    Future<void> postCreateOrderAsk(
       String? symbol, int? price, int? amount) async {
     var data = {
       "price": price,
       "amount": amount,
       "type": "ask",
-      "symbol": symbol
+      "symbol": symbol,
     };
-    await _dio.post(postCancleOrderUrl, data: data);
+    await _dio.post(postCreateOrderUrl, data: data);
   }
 }

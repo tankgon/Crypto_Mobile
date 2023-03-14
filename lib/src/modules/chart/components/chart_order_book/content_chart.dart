@@ -106,7 +106,7 @@ class _ContentChartState extends State<ContentChart> {
             },
           ),
           SizedBox(
-            width: widget.size.width / 1.2,
+            width: widget.size.width / 1.15,
             child: Row(children: [
               Expanded(
                 child: Column(
@@ -119,9 +119,9 @@ class _ContentChartState extends State<ContentChart> {
                         style: AppTextStyles.h1C,
                       ),
                     ),
-                    Container(
+                    SizedBox(
                         height: widget.size.height,
-                        padding: const EdgeInsets.only(right: 10),
+                        width: widget.size.width / 2.6,
                         child: StreamBuilder<OrderResponse>(
                             stream: orderBooksBlocBid.subject.stream,
                             builder: (context,
@@ -154,9 +154,9 @@ class _ContentChartState extends State<ContentChart> {
                         style: AppTextStyles.h1C,
                       ),
                     ),
-                    Container(
+                    SizedBox(
                         height: widget.size.height,
-                        padding: const EdgeInsets.only(right: 10),
+                        width: widget.size.width / 2.6,
                         child: StreamBuilder<OrderResponse>(
                             stream: orderBooksBlocAsk.subject.stream,
                             builder: (context,

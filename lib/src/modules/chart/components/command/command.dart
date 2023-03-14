@@ -33,7 +33,7 @@ class _CommandState extends State<Command> {
   Widget build(BuildContext context) {
     return Container(
         margin: const EdgeInsets.only(top: 20),
-        child: StreamBuilder<ListOrderResponse>(
+        child: StreamBuilder<ListOrderResponse>(       
             stream: listOrdersBloc.subject.stream,
             builder: (context, AsyncSnapshot<ListOrderResponse> snapshot) {
               if (snapshot.hasData) {

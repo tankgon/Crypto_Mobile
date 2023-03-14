@@ -2,17 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:movie_flutter/src/styles/themes/app_colors.dart';
 import 'package:movie_flutter/src/styles/themes/app_text_styles.dart';
 
+import '../../../../config/api/crypto_repository.dart';
 import '../../../../styles/widgets/input_number.dart';
 import '../../../../styles/widgets/input_string.dart';
+import '../../../home/home_page.dart';
 
 class SalePage extends StatelessWidget {
   const SalePage({
     Key? key,
+    this.symbolStock,
   }) : super(key: key);
+
+  final String? symbolStock;
 
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
+    final price = TextEditingController();
+    final amount = TextEditingController();
     return Scaffold(
       body: SafeArea(
           child: SingleChildScrollView(
@@ -87,37 +94,53 @@ class SalePage extends StatelessWidget {
               Container(
                 padding:
                     const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
-                height: size.height / 1.7,
                 child: Column(
-                  children: const [
-                    InputToken(
+                  children: [
+                    const InputToken(
                       label: "Xác nhận Token",
                     ),
-                    TextNumber(lable: 'Số lượng bán', suffix: '.000 VND'),
-                    TextNumber(lable: 'Khối lượng bán', suffix: ''),
+                    TextNumber(
+                        controller: price,
+                        lable: 'Giá bán',
+                        suffix: '.000 VND'),
+                    TextNumber(
+                        controller: amount, lable: 'Số lượng bán', suffix: ''),
                   ],
                 ),
               ),
-              Expanded(
-                  child: Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Container(
-                        width: size.width,
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 24, vertical: 30),
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: AppColors.red,
-                              shape: const RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10)))),
-                          onPressed: () {},
-                          child: const Padding(
-                            padding: EdgeInsets.all(16.0),
-                            child: Text('Bán', style: AppTextStyles.h2),
-                          ),
-                        ),
-                      )))
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 24, vertical: 30),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.red,
+                      shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10)))),
+                  onPressed: () {
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (BuildContext context) => const HomePage(),
+                      ),
+                      (route) => false,
+                    );
+                    CryptoRepository().postCreateOrderAsk(
+                      symbolStock,
+                      int.tryParse(price.text),
+                      int.tryParse(amount.text),
+                    );
+                  },
+                  child: const Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Text(
+                      'Bán',
+                      style: TextStyle(
+                        fontSize: 20,
+                      ),
+                    ),
+                  ),
+                ),
+              )
             ],
           ),
         ),

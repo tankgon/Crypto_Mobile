@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:movie_flutter/src/modules/home/home_page.dart';
 import 'package:movie_flutter/src/styles/themes/app_colors.dart';
 import 'package:movie_flutter/src/styles/themes/app_text_styles.dart';
-
 import '../../../../config/api/crypto_repository.dart';
 import '../../../../styles/widgets/input_number.dart';
 import '../../../../styles/widgets/input_string.dart';
@@ -19,6 +19,7 @@ class BuyPage extends StatelessWidget {
     final Size size = MediaQuery.of(context).size;
     final price = TextEditingController();
     final amount = TextEditingController();
+
     return Scaffold(
       body: SafeArea(
           child: SingleChildScrollView(
@@ -93,7 +94,6 @@ class BuyPage extends StatelessWidget {
               Container(
                 padding:
                     const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
-                height: size.height / 1.7,
                 child: Column(
                   children: [
                     const InputToken(
@@ -101,45 +101,46 @@ class BuyPage extends StatelessWidget {
                     ),
                     TextNumber(
                         controller: price,
-                        lable: 'Số lượng mua',
+                        lable: 'Giá mua',
                         suffix: '.000 VND'),
                     TextNumber(
-                        controller: amount,
-                        lable: 'Khối lượng mua',
-                        suffix: ''),
+                        controller: amount, lable: 'Số lượng mua', suffix: ''),
                   ],
                 ),
               ),
-              Expanded(
-                  child: Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Container(
-                        width: size.width,
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 24, vertical: 30),
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: AppColors.originGreen,
-                              shape: const RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10)))),
-                          onPressed: () {
-                            CryptoRepository().postCreateOrderAsk(
-                                symbolStock,
-                                int.tryParse(price.toString()),
-                                int.tryParse(amount.toString()));
-                          },
-                          child: const Padding(
-                            padding: EdgeInsets.all(16.0),
-                            child: Text(
-                              'Mua',
-                              style: TextStyle(
-                                fontSize: 20,
-                              ),
-                            ),
-                          ),
-                        ),
-                      )))
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 24, vertical: 30),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.originGreen,
+                      shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10)))),
+                  onPressed: () {
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (BuildContext context) => const HomePage(),
+                      ),
+                      (route) => false,
+                    );
+                    CryptoRepository().postCreateOrderBid(
+                      symbolStock,
+                      int.tryParse(price.text),
+                      int.tryParse(amount.text),
+                    );
+                  },
+                  child: const Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Text(
+                      'Mua',
+                      style: TextStyle(
+                        fontSize: 20,
+                      ),
+                    ),
+                  ),
+                ),
+              )
             ],
           ),
         ),
