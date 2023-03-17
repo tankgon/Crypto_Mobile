@@ -33,7 +33,7 @@ class _CommandState extends State<Command> {
   Widget build(BuildContext context) {
     return Container(
         margin: const EdgeInsets.only(top: 20),
-        child: StreamBuilder<ListOrderResponse>(       
+        child: StreamBuilder<ListOrderResponse>(
             stream: listOrdersBloc.subject.stream,
             builder: (context, AsyncSnapshot<ListOrderResponse> snapshot) {
               if (snapshot.hasData) {
@@ -57,9 +57,9 @@ Widget _buildOrderItem(Size size, ListOrderResponse data) {
       itemCount: listOrderInit.length,
       itemBuilder: (context, index) {
         return Padding(
-          padding: const EdgeInsets.only(bottom: 20),
+          padding: const EdgeInsets.only(bottom: 10),
           child: Container(
-              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
               margin: const EdgeInsets.only(left: 20, right: 20),
               decoration: BoxDecoration(
                   color: listOrderInit[index].type == 'bid'
@@ -71,7 +71,7 @@ Widget _buildOrderItem(Size size, ListOrderResponse data) {
                   Expanded(
                     flex: 4,
                     child: Padding(
-                      padding: const EdgeInsets.only(right: 16),
+                      padding: const EdgeInsets.only(right: 8),
                       child: Column(children: [
                         RowItem(
                             name: 'Giá :',
@@ -90,7 +90,7 @@ Widget _buildOrderItem(Size size, ListOrderResponse data) {
                   Expanded(
                       flex: 4,
                       child: Container(
-                        height: size.height / 15,
+                        height: size.height / 13,
                         padding: const EdgeInsets.only(right: 16),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,

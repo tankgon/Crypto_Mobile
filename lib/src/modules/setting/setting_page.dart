@@ -24,7 +24,7 @@ class SettingPage extends StatelessWidget {
           child: Column(
             children: [
               const Padding(
-                padding: EdgeInsets.symmetric(vertical: 40),
+                padding: EdgeInsets.symmetric(vertical: 20),
                 child: Text(
                   'Settings',
                   style: AppTextStyles.h2W,

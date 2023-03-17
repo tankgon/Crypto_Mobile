@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
+import 'package:movie_flutter/src/models/assets_response.dart';
 import 'package:movie_flutter/src/models/list_order_response.dart';
 import 'package:movie_flutter/src/models/market_response.dart';
 import 'package:movie_flutter/src/models/order_response.dart';
@@ -24,6 +25,7 @@ class CryptoRepository {
   var getListOrderResponseUrl = '$mainUrl/api/v1/orders/enabled';
   var getMarketUrl = '$mainUrl/api/v1/orders/historyMatched';
   var getHistoryUrl = '$mainUrl/api/v1/orders/history';
+  var getAssetsUrl = '$mainUrl/api/v1/assets';
   //post
   var postCancleOrderUrl = '$mainUrl/api/v1/orders/cancel';
   var postCreateOrderUrl = '$mainUrl/api/v1/orders';
@@ -93,7 +95,7 @@ class CryptoRepository {
     await _dio.post(postCreateOrderUrl, data: data);
   }
 
-    Future<void> postCreateOrderAsk(
+  Future<void> postCreateOrderAsk(
       String? symbol, int? price, int? amount) async {
     var data = {
       "price": price,
@@ -102,5 +104,14 @@ class CryptoRepository {
       "symbol": symbol,
     };
     await _dio.post(postCreateOrderUrl, data: data);
+  }
+
+  Future<AssetsResponse> getAssets() async {
+    try {
+      Response response = await _dio.get(getAssetsUrl);
+      return AssetsResponse.fromJson(response.data);
+    } catch (error) {
+      return AssetsResponse.withError("$error");
+    }
   }
 }

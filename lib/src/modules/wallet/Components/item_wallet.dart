@@ -30,7 +30,7 @@ class ItemInformation extends StatelessWidget {
               padding: const EdgeInsets.only(left: 16.0),
               child: Text(
                 label ?? '',
-                style: AppTextStyles.h2C,
+                style: AppTextStyles.h1C,
               ),
             ),
           ),
@@ -45,7 +45,7 @@ class ItemInformation extends StatelessWidget {
                 padding: const EdgeInsets.only(right: 16.0),
                 child: Text(
                   money ?? '',
-                  style: AppTextStyles.h2,
+                  style: AppTextStyles.h1,
                 )),
           )
         ],

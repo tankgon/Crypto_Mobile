@@ -34,7 +34,7 @@ class _HistoryState extends State<History> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
         child: Padding(
-      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 24),
+      padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 24),
       child: Column(children: [
         Container(
           width: widget.size.width,

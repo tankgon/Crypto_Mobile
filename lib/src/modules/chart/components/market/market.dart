@@ -33,7 +33,7 @@ class _MarketWidgetState extends State<MarketWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 24),
+      padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
       child: Column(children: [
         Container(
           width: widget.size.width,

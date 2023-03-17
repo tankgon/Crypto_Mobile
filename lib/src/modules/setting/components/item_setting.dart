@@ -22,7 +22,7 @@ class ItemSetting extends StatelessWidget {
               Icon(
                 icon,
                 color: AppColors.white,
-                size: 30,
+                size: 28,
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 16),
@@ -31,7 +31,7 @@ class ItemSetting extends StatelessWidget {
                   child: Text(
                     name,
                     style: const TextStyle(
-                        fontSize: 20, overflow: TextOverflow.ellipsis),
+                        fontSize: 17, overflow: TextOverflow.ellipsis),
                   ),
                 ),
               ),

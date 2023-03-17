@@ -10,8 +10,9 @@ class GradientButton extends StatelessWidget {
   final String? name;
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
     return Container(
-      width: double.infinity,
+      width: size.width,
       height: 60,
       margin: const EdgeInsets.only(top: 50),
       decoration: const ShapeDecoration(

@@ -14,7 +14,7 @@ class ValueStock extends StatelessWidget {
       child: Text(name,
           style: TextStyle(
             color: color,
-            fontSize: 16,
+            fontSize: 14,
           )),
     );
   }

@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
         notchMargin: 10,
         color: AppColors.black,
         child: SizedBox(
-          height: 60,
+          height: 65,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
@@ -100,10 +100,10 @@ class _HomePageState extends State<HomePage> {
                                 color: AppColors.grey,
                               ),
                         currentTab == 1
-                            ? const GradientText('Tài khoản',
+                            ? const GradientText('User',
                                 gradient: AppColors.gradienIcon)
                             : const Text(
-                                'Tài khoản',
+                                'User',
                                 style: TextStyle(
                                   color: AppColors.grey,
                                 ),
