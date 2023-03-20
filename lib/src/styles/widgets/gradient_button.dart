@@ -14,7 +14,7 @@ class GradientButton extends StatelessWidget {
     return Container(
       width: size.width,
       height: 60,
-      margin: const EdgeInsets.only(top: 50),
+      margin: const EdgeInsets.only(top: 20),
       decoration: const ShapeDecoration(
           shape: StadiumBorder(), gradient: AppColors.gradienIcon),
       child: MaterialButton(

@@ -17,6 +17,9 @@ dependencies:
   freezed_annotation: ^2.2.0
   rxdart: ^0.27.7
   intl: ^0.18.0
+  flutter_svg: ^1.1.6
+  get: ^4.6.5
+  hexcolor: ^3.0.1
   
 
 dev_dependencies:
@@ -29,4 +32,5 @@ flutter:
 
   assets:
     - images/
+    - svgs/
 

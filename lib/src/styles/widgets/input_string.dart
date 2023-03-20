@@ -5,17 +5,16 @@ import 'package:movie_flutter/src/styles/themes/app_text_styles.dart';
 class InputToken extends StatelessWidget {
   const InputToken({
     Key? key,
-    this.label,
+    required this.label,
   }) : super(key: key);
 
   final String? label;
-
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(bottom: 20),
-      padding: const EdgeInsets.only(top: 4, bottom: 4, left: 20, right: 20),
+      padding: const EdgeInsets.only(left: 20, right: 20),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           border: Border.all(color: AppColors.grey)),

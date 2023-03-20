@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
+import '../../models/platform.dart';
 import '../../styles/themes/app_colors.dart';
 import '../../styles/themes/app_text_styles.dart';
 import '../../styles/widgets/gradien_text.dart';
 import '../stock/components/background_widget.dart';
+import 'components/Cast/cart_bar.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -11,6 +13,17 @@ class ProfilePage extends StatefulWidget {
   @override
   State<ProfilePage> createState() => _ProfilePageState();
 }
+
+List<IProfile> profile = [
+  IProfile('svgs/gg.svg', 'google'),
+  IProfile('svgs/fb.svg', 'facebook'),
+  IProfile('svgs/ig.svg', 'instagram'),
+  IProfile('svgs/tw.svg', 'twitter'),
+  IProfile('svgs/dc.svg', 'discord'),
+  IProfile('svgs/zl.svg', 'zalo'),
+  IProfile('svgs/gh.svg', 'github'),
+  IProfile('svgs/tt.svg', 'tiktok'),
+];
 
 class _ProfilePageState extends State<ProfilePage>
     with SingleTickerProviderStateMixin {
@@ -54,7 +67,8 @@ class _ProfilePageState extends State<ProfilePage>
                           borderRadius: BorderRadius.circular(14),
                           image: const DecorationImage(
                             fit: BoxFit.cover,
-                            image: AssetImage('images/3.png'),
+                            image: NetworkImage(
+                                "https://source.unsplash.com/random/200x200?sig=incrementingIdentifier"),
                           ),
                         ),
                       ),
@@ -104,7 +118,7 @@ class _ProfilePageState extends State<ProfilePage>
                             padding: const EdgeInsets.only(left: 8, bottom: 8),
                             width: size.width,
                             child: const Text(
-                              'Địa chỉ: Nha Trang',
+                              'Địa chỉ: Vũng Tàu',
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 14,
@@ -158,22 +172,47 @@ class _ProfilePageState extends State<ProfilePage>
                               const Padding(
                                 padding: EdgeInsets.only(left: 24),
                                 child: Text(
-                                  'Nếu đã chọn được nơi lưu trữ phù hợp, anh em có thể ghi Passphrase vào đó. Nhưng nếu anh em vẫn nghi ngờ về độ bảo mật, có thể “gây nhiễu” Passphrase với cách này, cho dù người khác có thấy được Passphrase cũng không thể nào vào được. Nhưng nhược điểm là anh em cần nhớ “chìa khóa giải mã”, nếu không muốn tài sản của mình nằm yên như cách nhiều người cho BTC của họ “ngủ quên” nhiều năm. \n\nMột cách khác dành cho anh em thích ghi ra giấy, đó là ghi Passphrase ra nhiều mẫu giấy, sau đó đưa cho vài người khác giữ, hoặc cất két sắt. Cách này khá bảo mật, nhưng khá tốn công và đòi hỏi những người trên không hiểu gì về nội dung trên giấy.',
+                                  'Nếu đã chọn được nơi lưu trữ phù hợp, bạn có thể ghi Passphrase vào đó. Nhưng nếu bạn vẫn nghi ngờ về độ bảo mật, có thể “gây nhiễu” Passphrase với cách này, cho dù người khác có thấy được Passphrase cũng không thể nào vào được. Nhưng nhược điểm là bạn cần nhớ “chìa khóa giải mã”, nếu không muốn tài sản của mình nằm yên như cách nhiều người cho BTC của họ “ngủ quên” nhiều năm. \n\nMột cách khác dành cho bạn thích ghi ra giấy, đó là ghi Passphrase ra nhiều mẫu giấy, sau đó đưa cho vài người khác giữ, hoặc cất két sắt. Cách này khá bảo mật, nhưng khá tốn công và đòi hỏi những người trên không hiểu gì về nội dung trên giấy.',
                                   style: TextStyle(
                                       color: Colors.white, fontSize: 12),
                                 ),
                               ),
-                              buildTitle('Sử dụng Email riêng'),
-
-                              // CastBar(size: size),
-                              buildTitle('Trailer and song'),
-                              // const TrailerBar()
+                              buildTitle('Xác thực tài khoản'),
+                              CastBar(size: size),
+                              buildTitle('Đăng nhập xác thực tại bản web'),
+                              const Padding(
+                                padding: EdgeInsets.only(left: 24),
+                                child: Text(
+                                  'https://csdl.vercel.app/',
+                                  style: TextStyle(
+                                      color: AppColors.blueMain, fontSize: 16),
+                                ),
+                              ),
                             ],
                           ),
-                          Container(
-                            alignment: Alignment.center,
-                            child: const Text('Review Page'),
-                          )
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                width: size.width / 4.5,
+                                height: size.width / 4.5,
+                                margin: const EdgeInsets.only(bottom: 10),
+                                padding: const EdgeInsets.only(left: 24),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(14),
+                                    image: const DecorationImage(
+                                        fit: BoxFit.cover,
+                                        image: AssetImage('images/gift.png'))),
+                              ),
+                              Container(
+                                margin:
+                                    EdgeInsets.only(bottom: size.height / 3),
+                                padding: const EdgeInsets.only(left: 24),
+                                child: const Text('hiện chưa có nhiệm vụ nào',
+                                    style: AppTextStyles.h1C),
+                              ),
+                            ],
+                          ),
                         ],
                       ),
                     )

@@ -107,6 +107,9 @@ Widget _buildOrderItem(Size size, ListOrderResponse data) {
                       flex: 1,
                       child: GestureDetector(
                         onTap: (() {
+                          // setState(() {
+
+                          // });
                           CryptoRepository()
                               .postCancleOrder(listOrderInit[index].orderId);
                         }),

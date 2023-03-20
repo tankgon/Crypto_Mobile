@@ -1,29 +1,28 @@
-// import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+import '../../profile_page.dart';
+import 'cast_item.dart';
 
-// import '../../movie_detail_page.dart';
-// import 'cast_item.dart';
+class CastBar extends StatelessWidget {
+  const CastBar({
+    Key? key,
+    required this.size,
+  }) : super(key: key);
 
-// class CastBar extends StatelessWidget {
-//   const CastBar({
-//     Key? key,
-//     required this.size,
-//   }) : super(key: key);
+  final Size size;
 
-//   final Size size;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return SingleChildScrollView(
-//       scrollDirection: Axis.horizontal,
-//       child: Row(
-//           children: profile
-//               .map((e) => Builder(builder: (context) {
-//                     return CastItem(
-//                       size: size,
-//                       e: e,
-//                     );
-//                   }))
-//               .toList()),
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+          children: profile
+              .map((e) => Builder(builder: (context) {
+                    return CastItem(
+                      size: size,
+                      e: e,
+                    );
+                  }))
+              .toList()),
+    );
+  }
+}

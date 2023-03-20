@@ -41,4 +41,8 @@ class AppTextStyles {
     fontSize: 40,
     color: AppColors.white,
   );
+  static const h1limit = TextStyle(
+    fontSize: 16,
+    color: AppColors.pink,
+  );
 }

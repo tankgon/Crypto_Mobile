@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-import 'package:movie_flutter/src/modules/home/home_page.dart';
+import 'package:get/get.dart';
+import 'package:movie_flutter/src/modules/splash/splash_page.dart';
 import 'package:movie_flutter/src/styles/themes/app_colors.dart';
 
 void main() {
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
         statusBarColor: AppColors.none, statusBarBrightness: Brightness.dark));
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
             .textTheme
             .apply(bodyColor: AppColors.white, displayColor: AppColors.white),
       ),
-      home: const HomePage(),
+      home: const SplashPage(),
     );
   }
 }

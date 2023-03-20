@@ -16,7 +16,9 @@ class BackGroundWidget extends StatelessWidget {
           height: size.height / 3.5,
           decoration: const BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage('images/3.png'), fit: BoxFit.contain),
+                  image: NetworkImage(
+                      "https://source.unsplash.com/random/200x200?sig=incrementingIdentifier"),
+                  fit: BoxFit.contain),
               gradient: LinearGradient(
                   colors: [Colors.transparent, Colors.black87],
                   begin: Alignment.topCenter,
