@@ -1,23 +1,35 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+
+import 'package:movie_flutter/src/models/login_response.dart';
 import 'package:movie_flutter/src/modules/profile/profile_page.dart';
-import 'package:movie_flutter/src/styles/themes/app_colors.dart';
-import 'package:movie_flutter/src/modules/wallet/wallet_page.dart';
-import 'package:movie_flutter/src/modules/stock/stock_page.dart';
 import 'package:movie_flutter/src/modules/setting/setting_page.dart';
-import '../../styles/widgets/gradien_text.dart';
-import '../../styles/widgets/gradient_icon.dart';
+import 'package:movie_flutter/src/modules/stock/stock_page.dart';
+import 'package:movie_flutter/src/modules/wallet/wallet_page.dart';
+import 'package:movie_flutter/src/styles/themes/app_colors.dart';
+
+import '../../styles/widgets/gradien_text_widget.dart';
+import '../../styles/widgets/gradient_icon_widget.dart';
 import 'components/botton_sheet.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
-
+  const HomePage({
+    Key? key,
+    this.loginResData,
+  }) : super(key: key);
+  final LoginResData? loginResData;
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  int currentTab = 0;
+  // tokenData() async {
+  //   SharedPreferences res = await SharedPreferences.getInstance();
+  //   res.setString('tokenne', widget.loginResData?.token ?? '');
+  //   print('thanhcong');
+  // }
 
+  int currentTab = 0;
   final PageStorageBucket bucket = PageStorageBucket();
   Widget currentScreent = const StockPage();
   @override
@@ -31,10 +43,12 @@ class _HomePageState extends State<HomePage> {
         child: const Icon(Icons.add),
         onPressed: () {
           showModalBottomSheet(
-              isScrollControlled: false,
+              backgroundColor: AppColors.darkerBackground,
+              isScrollControlled: true,
               context: context,
               builder: (BuildContext context) {
-                return const BottonSheet();
+                return BottonSheet(
+                    loginResData: widget.loginResData.toString());
               });
         },
       ),
@@ -85,7 +99,9 @@ class _HomePageState extends State<HomePage> {
                     minWidth: 40,
                     onPressed: () {
                       setState(() {
-                        currentScreent = const ProfilePage();
+                        currentScreent = ProfilePage(
+                          dataProfile: widget.loginResData,
+                        );
                         currentTab = 1;
                       });
                     },
@@ -120,7 +136,9 @@ class _HomePageState extends State<HomePage> {
                     minWidth: 40,
                     onPressed: () {
                       setState(() {
-                        currentScreent = const WalletPage();
+                        currentScreent = WalletPage(
+                          dataProfile: widget.loginResData,
+                        );
                         currentTab = 2;
                       });
                     },

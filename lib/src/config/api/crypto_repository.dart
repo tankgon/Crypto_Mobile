@@ -1,21 +1,25 @@
 import 'package:dio/dio.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:logger/logger.dart';
+import 'package:movie_flutter/src/config/api/user_repository.dart';
 import 'package:movie_flutter/src/models/assets_response.dart';
 import 'package:movie_flutter/src/models/list_order_response.dart';
 import 'package:movie_flutter/src/models/market_response.dart';
 import 'package:movie_flutter/src/models/order_response.dart';
 import 'package:movie_flutter/src/models/stock_response.dart';
+import 'package:movie_flutter/src/modules/home/home_page.dart';
 
 class CryptoRepository {
   static String mainUrl = "https://stock-be.fly.dev";
+
   final Dio _dio = Dio()
     ..options = BaseOptions(baseUrl: mainUrl, headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
       'X-Requested-With': 'XMLHttpRequest',
       'withCredentials': true,
-      "Authorization":
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidXNlcl80IiwidXNlcm5hbWUiOiJ0aGFuaG5lMSIsImlhdCI6MTY3ODUwNzU1OCwiZXhwIjoxNjg2MjgzNTU4fQ.qvdBBifi6kGNkSC4mIixFCypntIkFVmfOMXBBlRsrl8"
+      "Authorization": "Bearer ${UserRepository().dataToken}"
     });
 
   //get
@@ -29,9 +33,13 @@ class CryptoRepository {
   //post
   var postCancleOrderUrl = '$mainUrl/api/v1/orders/cancel';
   var postCreateOrderUrl = '$mainUrl/api/v1/orders';
+  var postdepositUrl = '$mainUrl/api/v1/assets/deposit';
+  var postWithdrawUrl = '$mainUrl/api/v1/assets/withdraw';
+
   var logger = Logger();
 
   Future<StockResponse> getStock() async {
+    print('thanhne ${UserRepository().dataToken}');
     var params = {"language": "en-US"};
     try {
       Response response = await _dio.get(getStockUrl, queryParameters: params);
@@ -112,6 +120,26 @@ class CryptoRepository {
       return AssetsResponse.fromJson(response.data);
     } catch (error) {
       return AssetsResponse.withError("$error");
+    }
+  }
+
+  Future<void> postdeposit(int? amount) async {
+    var data = {"amount": amount};
+    try {
+      await _dio.post(postdepositUrl, data: data);
+      Get.to(() => const HomePage());
+    } catch (error) {
+      rethrow;
+    }
+  }
+
+  Future<void> postWithdraw(int? amount) async {
+    var data = {"amount": amount};
+    try {
+      await _dio.post(postWithdrawUrl, data: data);
+      Get.to(() => const HomePage());
+    } catch (error) {
+      rethrow;
     }
   }
 }

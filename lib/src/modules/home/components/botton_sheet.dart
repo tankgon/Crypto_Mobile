@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:movie_flutter/src/config/api/crypto_repository.dart';
 import 'package:movie_flutter/src/styles/themes/app_colors.dart';
 import 'package:movie_flutter/src/styles/themes/app_text_styles.dart';
-
-import '../../../styles/widgets/gradient_button.dart';
-import '../../../styles/widgets/input_number.dart';
-import '../../../styles/widgets/input_string.dart';
+import '../../../styles/widgets/gradient_button_widget.dart';
+import '../../../styles/widgets/input_number_widget.dart';
+import '../../../styles/widgets/input_string_widget.dart';
 
 class BottonSheet extends StatefulWidget {
-  const BottonSheet({Key? key}) : super(key: key);
+  const BottonSheet({Key? key, this.loginResData}) : super(key: key);
+
+  final String? loginResData;
   @override
   State<BottonSheet> createState() => _BottonSheet();
 }
@@ -24,64 +26,78 @@ class _BottonSheet extends State<BottonSheet>
 
   @override
   Widget build(BuildContext context) {
+    final amountDeposit = TextEditingController();
+    final amountWithdraw = TextEditingController();
+
     final Size size = MediaQuery.of(context).size;
-    return Scaffold(
-      resizeToAvoidBottomInset: true,
-      body: SingleChildScrollView(
-        child: SizedBox(
-          height: size.height,
-          child: Column(
-            // mainAxisAlignment: MainAxisAlignment.start,
-            // crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 40),
-                child: TabBar(
-                  tabs: const [Tab(text: 'Admit'), Tab(text: 'Withdraw')],
-                  controller: _tabControl,
-                  indicatorSize: TabBarIndicatorSize.label,
-                  labelStyle: AppTextStyles.h2,
-                  indicatorColor: AppColors.white,
-                ),
-              ),
-              Expanded(
-                child: TabBarView(
-                  controller: _tabControl,
-                  children: <Widget>[
-                    Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 30),
-                      child: Column(
-                        children: const [
-                          InputToken(
-                            label: "Xác nhận Token",
-                          ),
-                          TextNumber(lable: 'Số lượng nạp', suffix: '.000 VND'),
-                          GradientButton(
-                            name: 'Nạp',
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 30),
-                      child: Column(
-                        children: const [
-                          InputToken(
-                            label: "Xác nhận Token",
-                          ),
-                          TextNumber(lable: 'Số lượng rút', suffix: '.000 VND'),
-                          GradientButton(
-                            name: 'Rút',
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
+    return SizedBox(
+      height: size.height / 1.2,
+      child: Column(
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20),
+            child: TabBar(
+              tabs: const [Tab(text: 'Nạp'), Tab(text: 'Rút')],
+              controller: _tabControl,
+              indicatorSize: TabBarIndicatorSize.label,
+              labelStyle: AppTextStyles.h2,
+              indicatorColor: AppColors.white,
+            ),
           ),
-        ),
+          Expanded(
+            child: TabBarView(
+              controller: _tabControl,
+              children: <Widget>[
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 24),
+                  child: Column(
+                    children: [
+                      const InputToken(
+                        label: "Xác nhận Token",
+                        controller: null,
+                         obscureText: false
+                      ),
+                      TextNumber(
+                          lable: 'Số lượng nạp',
+                          suffix: '.000 VND',
+                          controller: amountDeposit),
+                      GradientButton(
+                        name: 'Nạp',
+                        even: () {
+                          CryptoRepository()
+                              .postdeposit(int.tryParse(amountDeposit.text));
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 30),
+                  child: Column(
+                    children: [
+                      const InputToken(
+                        label: "Xác nhận Token",
+                        controller: null,
+                         obscureText: false
+                      ),
+                      TextNumber(
+                          lable: 'Số lượng rút',
+                          suffix: '.000 VND',
+                          controller: amountWithdraw),
+                      GradientButton(
+                        name: 'Rút',
+                        even: () {
+                          CryptoRepository()
+                              .postWithdraw(int.tryParse(amountWithdraw.text));
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

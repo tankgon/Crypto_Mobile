@@ -5,7 +5,7 @@ import 'package:movie_flutter/src/styles/themes/app_text_styles.dart';
 import 'package:movie_flutter/src/modules/chart/components/chart_order_book/buy_page.dart';
 import 'package:movie_flutter/src/modules/chart/components/chart_order_book/sale_page.dart';
 
-import '../../../../styles/widgets/gradien_text.dart';
+import '../../../../styles/widgets/gradien_text_widget.dart';
 
 class HeaderChart extends StatelessWidget {
   const HeaderChart({

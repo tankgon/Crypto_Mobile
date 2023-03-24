@@ -20,6 +20,8 @@ dependencies:
   flutter_svg: ^1.1.6
   get: ^4.6.5
   hexcolor: ^3.0.1
+  restart_app: ^1.1.1+1
+  # shared_preferences: ^2.0.18
   
 
 dev_dependencies:

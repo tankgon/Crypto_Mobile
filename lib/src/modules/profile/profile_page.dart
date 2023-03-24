@@ -1,14 +1,22 @@
-import 'package:flutter/material.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:movie_flutter/src/models/login_response.dart';
 import '../../models/platform.dart';
 import '../../styles/themes/app_colors.dart';
 import '../../styles/themes/app_text_styles.dart';
-import '../../styles/widgets/gradien_text.dart';
+import '../../styles/widgets/gradien_text_widget.dart';
 import '../stock/components/background_widget.dart';
 import 'components/Cast/cart_bar.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({super.key});
+  const ProfilePage({
+    Key? key,
+    required this.dataProfile,
+  }) : super(key: key);
+
+  final LoginResData? dataProfile;
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -28,6 +36,7 @@ List<IProfile> profile = [
 class _ProfilePageState extends State<ProfilePage>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
+
   @override
   void initState() {
     super.initState();
@@ -79,9 +88,9 @@ class _ProfilePageState extends State<ProfilePage>
                         Container(
                           padding: const EdgeInsets.only(left: 8, bottom: 8),
                           width: size.width,
-                          child: const Text(
-                            'user_1',
-                            style: TextStyle(
+                          child: Text(
+                            widget.dataProfile?.userId.toString() ?? '',
+                            style: const TextStyle(
                               color: Colors.white,
                               fontSize: 24,
                             ),
@@ -90,16 +99,16 @@ class _ProfilePageState extends State<ProfilePage>
                         Container(
                           padding: const EdgeInsets.only(left: 8, bottom: 8),
                           width: size.width,
-                          child: const GradientText('Thanh ne',
+                          child: GradientText('${widget.dataProfile?.name}',
                               style: AppTextStyles.h2,
                               gradient: AppColors.gradienIcon),
                         ),
                         Container(
                             padding: const EdgeInsets.only(left: 8, bottom: 8),
                             width: size.width,
-                            child: const Text(
-                              'Tên: Nguyễn Phúc Thanh',
-                              style: TextStyle(
+                            child: Text(
+                              'Tên: ${widget.dataProfile?.username}',
+                              style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 14,
                                   fontWeight: FontWeight.w300),
@@ -107,9 +116,9 @@ class _ProfilePageState extends State<ProfilePage>
                         Container(
                             padding: const EdgeInsets.only(left: 8, bottom: 8),
                             width: size.width,
-                            child: const Text(
-                              'Sđt: 0703348869',
-                              style: TextStyle(
+                            child: Text(
+                              'Sđt: ${widget.dataProfile?.phoneNumber}',
+                              style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 14,
                                   fontWeight: FontWeight.w300),
@@ -117,9 +126,9 @@ class _ProfilePageState extends State<ProfilePage>
                         Container(
                             padding: const EdgeInsets.only(left: 8, bottom: 8),
                             width: size.width,
-                            child: const Text(
-                              'Địa chỉ: Vũng Tàu',
-                              style: TextStyle(
+                            child: Text(
+                              'Địa chỉ: ${widget.dataProfile?.address}',
+                              style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 14,
                                   fontWeight: FontWeight.w300),
@@ -127,9 +136,9 @@ class _ProfilePageState extends State<ProfilePage>
                         Container(
                             padding: const EdgeInsets.only(left: 8, bottom: 8),
                             width: size.width,
-                            child: const Text(
-                              'Ngày sinh: 25/04/2001',
-                              style: TextStyle(
+                            child: Text(
+                              'Ngày sinh: ${DateFormat.yMd().format(widget.dataProfile?.birthday ?? DateTime.now())}',
+                              style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 14,
                                   fontWeight: FontWeight.w300),
@@ -170,7 +179,7 @@ class _ProfilePageState extends State<ProfilePage>
                             children: [
                               buildTitle('Mã hóa Passphrase'),
                               const Padding(
-                                padding: EdgeInsets.only(left: 24),
+                                padding: EdgeInsets.only(left: 24, right: 12),
                                 child: Text(
                                   'Nếu đã chọn được nơi lưu trữ phù hợp, bạn có thể ghi Passphrase vào đó. Nhưng nếu bạn vẫn nghi ngờ về độ bảo mật, có thể “gây nhiễu” Passphrase với cách này, cho dù người khác có thấy được Passphrase cũng không thể nào vào được. Nhưng nhược điểm là bạn cần nhớ “chìa khóa giải mã”, nếu không muốn tài sản của mình nằm yên như cách nhiều người cho BTC của họ “ngủ quên” nhiều năm. \n\nMột cách khác dành cho bạn thích ghi ra giấy, đó là ghi Passphrase ra nhiều mẫu giấy, sau đó đưa cho vài người khác giữ, hoặc cất két sắt. Cách này khá bảo mật, nhưng khá tốn công và đòi hỏi những người trên không hiểu gì về nội dung trên giấy.',
                                   style: TextStyle(
@@ -179,6 +188,33 @@ class _ProfilePageState extends State<ProfilePage>
                               ),
                               buildTitle('Xác thực tài khoản'),
                               CastBar(size: size),
+                              buildTitle('Xác thực token'),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Container(
+                                    width: size.width / 1.5,
+                                    padding: const EdgeInsets.only(left: 24),
+                                    child: Text(widget.dataProfile?.token ?? "",
+                                        style: const TextStyle(
+                                            color: Colors.white, fontSize: 12),
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis),
+                                  ),
+                                  const Padding(
+                                    padding: EdgeInsets.only(right: 12),
+                                    child: Text(
+                                      'xem thêm',
+                                      style: TextStyle(
+                                          color: Colors.white54,
+                                          fontSize: 12,
+                                          overflow: TextOverflow.ellipsis),
+                                      maxLines: 1,
+                                    ),
+                                  ),
+                                ],
+                              ),
                               buildTitle('Đăng nhập xác thực tại bản web'),
                               const Padding(
                                 padding: EdgeInsets.only(left: 24),
@@ -228,7 +264,7 @@ class _ProfilePageState extends State<ProfilePage>
 
   Padding buildTitle(String content) {
     return Padding(
-      padding: const EdgeInsets.all(24),
+      padding: const EdgeInsets.only(left: 24, top: 18, bottom: 18),
       child: GradientText(content,
           style: AppTextStyles.h2, gradient: AppColors.gradienIcon),
     );

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:movie_flutter/src/config/api/user_repository.dart';
 import 'package:movie_flutter/src/modules/signup/signup_page.dart';
 import 'package:movie_flutter/src/styles/themes/app_colors.dart';
 import 'package:movie_flutter/src/styles/themes/app_text_styles.dart';
 
-import '../../styles/widgets/gradien_text.dart';
-import '../../styles/widgets/gradient_button.dart';
-import '../../styles/widgets/input_string.dart';
+import '../../styles/widgets/gradien_text_widget.dart';
+import '../../styles/widgets/gradient_button_widget.dart';
+import '../../styles/widgets/input_string_widget.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
@@ -19,6 +20,8 @@ class _SignInPageState extends State<SignInPage> {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
+    final email = TextEditingController();
+    final password = TextEditingController();
     return Scaffold(
       body: SingleChildScrollView(
         child: SafeArea(
@@ -49,9 +52,13 @@ class _SignInPageState extends State<SignInPage> {
               style: AppTextStyles.h2,
             ),
             const SizedBox(height: 30),
-            const InputToken(label: 'Email'),
-            const InputToken(label: 'Password'),
-            const GradientButton(name: 'Sign In'),
+            InputToken(label: 'Email', controller: email, obscureText: false),
+            InputToken(label: 'Password', controller: password, obscureText: true),
+            GradientButton(
+                name: 'Đăng nhập',
+                even: () {
+                  UserRepository().postLogin(email.text, password.text);
+                }),
             Center(
               child: Container(
                 margin: const EdgeInsets.symmetric(vertical: 50),
@@ -59,17 +66,17 @@ class _SignInPageState extends State<SignInPage> {
                   // crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text('Không có tài khoản? '),
+                    const Text('Bạn chưa có tài khoản BitBank? '),
                     GestureDetector(
                         onTap: () {
-                          Get.to(const SignUpPage());
-                          // setState(() {
-                          //   Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //         builder: (context) => const SignUpPage()),
-                          //   );
-                          // });
+                          Get.to(() => const SignUpPage());
+                          //   setState(() {
+                          //     Navigator.push(
+                          //       context,
+                          //       MaterialPageRoute(
+                          //           builder: (context) => const SignUpPage()),
+                          //     );
+                          //   });
                         },
                         child: const Text('Tạo ngay',
                             style: AppTextStyles.h1limit)),

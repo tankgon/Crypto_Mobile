@@ -2,18 +2,32 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:movie_flutter/src/styles/themes/app_colors.dart';
 
+import '../../styles/themes/app_colors.dart';
 import '../signin/signin_page.dart';
 
-class SplashPage extends StatelessWidget {
+class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  State<SplashPage> createState() => _SplashPageState();
+}
+
+class _SplashPageState extends State<SplashPage> {
+  @override
+  void initState() {
+    super.initState();
     Timer(const Duration(seconds: 3), () {
-      Get.to(const SignInPage());
+      Get.offAll(() => const SignInPage());
+      // Navigator.push(
+      //   context,
+      //   MaterialPageRoute(builder: (context) => const SignInPage()),
+      // );
     });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: AppColors.darkBackground,
@@ -34,15 +48,15 @@ class SplashPage extends StatelessWidget {
                 ),
               ),
             ),
-            // const SizedBox(
-            //   height: 25.0,
-            //   width: 25.0,
-            //   child: CircularProgressIndicator(
-            //     valueColor: AlwaysStoppedAnimation<Color>(
-            //         Color.fromARGB(255, 153, 160, 255)),
-            //     strokeWidth: 4.0,
-            //   ),
-            // )
+            const SizedBox(
+              height: 25.0,
+              width: 25.0,
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(
+                    Color.fromARGB(255, 153, 160, 255)),
+                strokeWidth: 4.0,
+              ),
+            )
           ],
         ),
       ),

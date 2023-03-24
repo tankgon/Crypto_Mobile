@@ -6,8 +6,10 @@ class GradientButton extends StatelessWidget {
   const GradientButton({
     Key? key,
     this.name,
+    required this.even,
   }) : super(key: key);
   final String? name;
+  final void Function() even;
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
@@ -20,11 +22,11 @@ class GradientButton extends StatelessWidget {
       child: MaterialButton(
         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
         shape: const StadiumBorder(),
+        onPressed: even,
         child: Text(
           name ?? '',
           style: AppTextStyles.h2W,
         ),
-        onPressed: () {},
       ),
     );
   }

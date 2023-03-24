@@ -66,13 +66,20 @@ class SettingPage extends StatelessWidget {
       ),
       Align(
         alignment: Alignment.bottomCenter,
-        child: Container(
-          padding: const EdgeInsets.only(bottom: 40),
-          width: size.width / 1.2,
-          child: ItemSetting(
-            size: size,
-            name: 'Logout',
-            icon: Icons.logout,
+        child: GestureDetector(
+          onTap: (() {
+            // RestartWidget.restartApp(context);
+            // Get.offAll(() => const SignInPage());
+            Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
+          }),
+          child: Container(
+            padding: const EdgeInsets.only(bottom: 40),
+            width: size.width / 1.2,
+            child: ItemSetting(
+              size: size,
+              name: 'Logout',
+              icon: Icons.logout,
+            ),
           ),
         ),
       )

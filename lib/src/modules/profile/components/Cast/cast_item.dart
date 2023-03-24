@@ -18,12 +18,12 @@ class CastItem extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Padding(
-          padding: const EdgeInsets.only(left: 10, bottom: 4),
+          padding: const EdgeInsets.only(left: 18, bottom: 4),
           child: Container(
-            width: size.width / 4.5,
-            height: size.width / 4.5,
+            width: size.width / 6.5,
+            height: size.width / 6.5,
             margin: const EdgeInsets.only(right: 8),
-            padding: const EdgeInsets.all(20),
+            padding: const EdgeInsets.all(12),
             decoration: const BoxDecoration(
                 color: Color.fromARGB(98, 245, 246, 249),
                 shape: BoxShape.circle),

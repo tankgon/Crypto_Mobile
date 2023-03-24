@@ -3,8 +3,7 @@ import 'package:movie_flutter/src/styles/themes/app_colors.dart';
 import 'package:movie_flutter/src/styles/themes/app_text_styles.dart';
 
 import '../../../../config/api/crypto_repository.dart';
-import '../../../../styles/widgets/input_number.dart';
-import '../../../../styles/widgets/input_string.dart';
+import '../../../../styles/widgets/input_number_widget.dart';
 import '../../../home/home_page.dart';
 
 class SalePage extends StatelessWidget {
@@ -96,9 +95,9 @@ class SalePage extends StatelessWidget {
                     const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
                 child: Column(
                   children: [
-                    const InputToken(
-                      label: "Xác nhận Token",
-                    ),
+                    // const InputToken(
+                    //   label: "Xác nhận Token",
+                    // ),
                     TextNumber(
                         controller: price,
                         lable: 'Giá bán',

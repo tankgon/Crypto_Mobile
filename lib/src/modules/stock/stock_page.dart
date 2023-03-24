@@ -35,7 +35,9 @@ class _StockPageState extends State<StockPage>
           Container(
             margin: const EdgeInsets.only(top: 8),
             child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  // CryptoRepository().getTokenData();
+                },
                 style: ElevatedButton.styleFrom(
                     shape: const CircleBorder(),
                     backgroundColor: AppColors.none),
