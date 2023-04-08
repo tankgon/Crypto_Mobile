@@ -1,3 +1,5 @@
+// ignore_for_file: no_logic_in_create_state
+
 import 'package:flutter/material.dart';
 import 'package:movie_flutter/src/models/list_order.dart';
 import 'package:movie_flutter/src/models/list_order_response.dart';
@@ -28,6 +30,12 @@ class _CommandState extends State<Command> {
     super.initState();
     listOrdersBloc.getListOrders(symbolStock);
   }
+  // @override
+  // void incrementCounter() {
+  //   setState(() {
+  //     listOrdersBloc.getListOrders(symbolStock);
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -106,13 +114,11 @@ Widget _buildOrderItem(Size size, ListOrderResponse data) {
                   Expanded(
                       flex: 1,
                       child: GestureDetector(
-                        onTap: (() {
-                          // setState(() {
-
-                          // });
+                        onTap: () {
                           CryptoRepository()
                               .postCancleOrder(listOrderInit[index].orderId);
-                        }),
+                          
+                        },
                         child: Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),

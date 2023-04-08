@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:movie_flutter/src/styles/themes/app_colors.dart';
 import 'package:movie_flutter/src/styles/themes/app_text_styles.dart';
-
 import '../../config/api/user_repository.dart';
 
 class InputToken extends StatelessWidget {
   const InputToken({
     Key? key,
     required this.label,
-    this.controller, required this.obscureText,
+    this.controller,
+    required this.obscureText,
   }) : super(key: key);
 
   final String? label;
@@ -28,7 +28,6 @@ class InputToken extends StatelessWidget {
         initialValue:
             controller == null ? '${UserRepository().dataToken}' : null,
         obscureText: obscureText ?? false,
-        
         decoration: InputDecoration(
             hintText: '',
             hintStyle: AppTextStyles.h1,

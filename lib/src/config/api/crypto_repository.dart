@@ -12,14 +12,14 @@ import 'package:movie_flutter/src/modules/home/home_page.dart';
 
 class CryptoRepository {
   static String mainUrl = "https://stock-be.fly.dev";
-
+  
   final Dio _dio = Dio()
     ..options = BaseOptions(baseUrl: mainUrl, headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
       'X-Requested-With': 'XMLHttpRequest',
       'withCredentials': true,
-      "Authorization": "Bearer ${UserRepository().dataToken}"
+      "Authorization": "Bearer ${UserRepository().dataToken}",
     });
 
   //get
@@ -39,7 +39,7 @@ class CryptoRepository {
   var logger = Logger();
 
   Future<StockResponse> getStock() async {
-    print('thanhne ${UserRepository().dataToken}');
+    print('thasnhfadsf ${UserRepository().dataToken}');
     var params = {"language": "en-US"};
     try {
       Response response = await _dio.get(getStockUrl, queryParameters: params);

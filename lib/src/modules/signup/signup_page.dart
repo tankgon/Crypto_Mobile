@@ -74,15 +74,35 @@ class _SignUpPageState extends State<SignUpPage> {
               style: AppTextStyles.h2,
             ),
             const SizedBox(height: 30),
-            InputToken(label: 'Tên sử dụng', controller: username, obscureText: false),
-            InputToken(label: 'Họ và tên', controller: fullName, obscureText: false),
-            InputToken(label: 'Mật khẩu', controller: password, obscureText: true),
-            InputToken(label: 'Số điện thoại', controller: phoneNumber, obscureText: false),
-            InputToken(label: 'Địa chỉ', controller: address, obscureText: false),
+            InputToken(
+              label: 'Tên sử dụng',
+              controller: username,
+              obscureText: false,
+            ),
+            InputToken(
+              label: 'Họ và tên',
+              controller: fullName,
+              obscureText: false,
+            ),
+            InputToken(
+              label: 'Mật khẩu',
+              controller: password,
+              obscureText: false,
+            ),
+            InputToken(
+              label: 'Số điện thoại',
+              controller: phoneNumber,
+              obscureText: false,
+            ),
+            InputToken(
+              label: 'Địa chỉ',
+              controller: address,
+              obscureText: false,
+            ),
             InputToken(
               label: 'Chứng minh nhân dân',
               controller: identificationNumber,
-               obscureText: false
+              obscureText: false,
             ),
             GestureDetector(
               onTap: (() => pickDate(context)),

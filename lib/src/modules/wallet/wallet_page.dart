@@ -1,15 +1,21 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first, must_call_super
 import 'package:flutter/material.dart';
+
 import 'package:movie_flutter/src/models/assets.dart';
 import 'package:movie_flutter/src/models/assets_response.dart';
 import 'package:movie_flutter/src/styles/themes/app_colors.dart';
 import 'package:movie_flutter/src/styles/themes/app_text_styles.dart';
+
 import '../../models/login_response.dart';
 import '../../styles/widgets/gradien_text_widget.dart';
 import 'Components/item_wallet.dart';
 import 'get_assets_bloc.dart';
 
 class WalletPage extends StatefulWidget {
-  const WalletPage({Key? key, this.dataProfile});
+  const WalletPage({
+    Key? key,
+    this.dataProfile,
+  }) : super(key: key);
   final LoginResData? dataProfile;
   @override
   State<WalletPage> createState() => _WalletPageState();
@@ -18,9 +24,9 @@ class WalletPage extends StatefulWidget {
 class _WalletPageState extends State<WalletPage> {
   @override
   void initState() {
-    super.initState();
     assestBloc.getAssetsUser();
   }
+  
 
   @override
   Widget build(BuildContext context) {

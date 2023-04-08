@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:movie_flutter/src/styles/themes/app_colors.dart';
 import 'package:movie_flutter/src/styles/themes/app_text_styles.dart';
 
+import '../signin/signin_page.dart';
 import '../stock/components/background_widget.dart';
 import 'components/item_setting.dart';
 
@@ -69,8 +71,8 @@ class SettingPage extends StatelessWidget {
         child: GestureDetector(
           onTap: (() {
             // RestartWidget.restartApp(context);
-            // Get.offAll(() => const SignInPage());
-            Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
+            Get.offAll(() => const SignInPage());
+            // Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
           }),
           child: Container(
             padding: const EdgeInsets.only(bottom: 40),

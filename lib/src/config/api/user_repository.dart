@@ -24,15 +24,13 @@ class UserRepository {
 
   Future<String?> postLogin(String email, String password) async {
     var data = {"username": email, "password": password};
-
     try {
       final response = await _dio.post(postLoginUrl, data: data);
       final res = LoginRes.fromMap(response.data);
       Get.to(() => HomePage(loginResData: res.data));
-      return dataToken = res.data?.token;
+      dataToken = res.data?.token;
     } catch (error) {
       Get.offAll(() => const SignInPage());
-      dataToken == null;
     }
     return null;
   }

@@ -1,3 +1,5 @@
+// ignore_for_file: no_logic_in_create_state
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:movie_flutter/src/models/market.dart';

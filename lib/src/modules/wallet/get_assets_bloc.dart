@@ -7,9 +7,12 @@ class AssetsBloc {
   final BehaviorSubject<AssetsResponse> _subject =
       BehaviorSubject<AssetsResponse>();
 
+  // var loginForm = {};
+
   getAssetsUser() async {
     AssetsResponse response = await _repository.getAssets();
     _subject.sink.add(response);
+    print('haha ${response.listAssest[0].freeAsset}');
   }
 
   dispose() {

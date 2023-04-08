@@ -1,13 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-
 import 'package:movie_flutter/src/models/login_response.dart';
 import 'package:movie_flutter/src/modules/profile/profile_page.dart';
 import 'package:movie_flutter/src/modules/setting/setting_page.dart';
 import 'package:movie_flutter/src/modules/stock/stock_page.dart';
 import 'package:movie_flutter/src/modules/wallet/wallet_page.dart';
 import 'package:movie_flutter/src/styles/themes/app_colors.dart';
-
+import '../../config/api/crypto_repository.dart';
 import '../../styles/widgets/gradien_text_widget.dart';
 import '../../styles/widgets/gradient_icon_widget.dart';
 import 'components/botton_sheet.dart';
@@ -23,12 +22,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // tokenData() async {
-  //   SharedPreferences res = await SharedPreferences.getInstance();
-  //   res.setString('tokenne', widget.loginResData?.token ?? '');
-  //   print('thanhcong');
-  // }
-
   int currentTab = 0;
   final PageStorageBucket bucket = PageStorageBucket();
   Widget currentScreent = const StockPage();
@@ -139,6 +132,7 @@ class _HomePageState extends State<HomePage> {
                         currentScreent = WalletPage(
                           dataProfile: widget.loginResData,
                         );
+                        CryptoRepository().getAssets();
                         currentTab = 2;
                       });
                     },

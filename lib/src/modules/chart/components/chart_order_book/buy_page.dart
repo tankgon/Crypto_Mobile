@@ -4,7 +4,6 @@ import 'package:movie_flutter/src/styles/themes/app_colors.dart';
 import 'package:movie_flutter/src/styles/themes/app_text_styles.dart';
 import '../../../../config/api/crypto_repository.dart';
 import '../../../../styles/widgets/input_number_widget.dart';
-import '../../../../styles/widgets/input_string_widget.dart';
 
 class BuyPage extends StatelessWidget {
   const BuyPage({

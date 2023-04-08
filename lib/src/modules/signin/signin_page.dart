@@ -4,7 +4,6 @@ import 'package:movie_flutter/src/config/api/user_repository.dart';
 import 'package:movie_flutter/src/modules/signup/signup_page.dart';
 import 'package:movie_flutter/src/styles/themes/app_colors.dart';
 import 'package:movie_flutter/src/styles/themes/app_text_styles.dart';
-
 import '../../styles/widgets/gradien_text_widget.dart';
 import '../../styles/widgets/gradient_button_widget.dart';
 import '../../styles/widgets/input_string_widget.dart';
@@ -53,10 +52,12 @@ class _SignInPageState extends State<SignInPage> {
             ),
             const SizedBox(height: 30),
             InputToken(label: 'Email', controller: email, obscureText: false),
-            InputToken(label: 'Password', controller: password, obscureText: true),
+            InputToken(
+                label: 'Password', controller: password, obscureText: false),
             GradientButton(
                 name: 'Đăng nhập',
                 even: () {
+                  // print('tha1 ${email.text}, ${password.text} ');
                   UserRepository().postLogin(email.text, password.text);
                 }),
             Center(
@@ -70,13 +71,6 @@ class _SignInPageState extends State<SignInPage> {
                     GestureDetector(
                         onTap: () {
                           Get.to(() => const SignUpPage());
-                          //   setState(() {
-                          //     Navigator.push(
-                          //       context,
-                          //       MaterialPageRoute(
-                          //           builder: (context) => const SignUpPage()),
-                          //     );
-                          //   });
                         },
                         child: const Text('Tạo ngay',
                             style: AppTextStyles.h1limit)),

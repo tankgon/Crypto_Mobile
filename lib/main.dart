@@ -4,18 +4,12 @@ import 'package:get/get.dart';
 import 'package:movie_flutter/src/modules/splash/splash_page.dart';
 import 'package:movie_flutter/src/styles/themes/app_colors.dart';
 
-import 'src/styles/widgets/restart_widget.dart';
-
 void main() {
-  runApp(
-    RestartWidget(child: const MyApp()),
-  );
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(

@@ -55,7 +55,8 @@ class _BottonSheet extends State<BottonSheet>
                       const InputToken(
                         label: "Xác nhận Token",
                         controller: null,
-                         obscureText: false
+                        obscureText: false,
+                       
                       ),
                       TextNumber(
                           lable: 'Số lượng nạp',
@@ -78,7 +79,8 @@ class _BottonSheet extends State<BottonSheet>
                       const InputToken(
                         label: "Xác nhận Token",
                         controller: null,
-                         obscureText: false
+                        obscureText: false,
+                      
                       ),
                       TextNumber(
                           lable: 'Số lượng rút',

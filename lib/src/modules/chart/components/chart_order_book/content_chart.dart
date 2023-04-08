@@ -1,4 +1,4 @@
-// ignore_for_file: depend_on_referenced_packages
+// ignore_for_file: depend_on_referenced_packages, no_logic_in_create_state
 
 import 'package:flutter/material.dart';
 import 'package:movie_flutter/src/models/order.dart';
