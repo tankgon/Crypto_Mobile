@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 import 'package:movie_flutter/src/models/login_response.dart';
 import 'package:movie_flutter/src/modules/signin/signin_page.dart';
-
 import '../../modules/home/home_page.dart';
 
 class UserRepository {

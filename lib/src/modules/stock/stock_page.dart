@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_flutter/src/models/stock_response.dart';
-import 'package:movie_flutter/src/modules/chart/chart_page.dart';
-import 'package:movie_flutter/src/modules/stock/get_stock_bloc.dart';
 import 'package:movie_flutter/src/styles/themes/app_colors.dart';
 import 'package:movie_flutter/src/styles/themes/app_text_styles.dart';
-import '../../models/stock.dart';
+import '../../styles/widgets/loading_widget.dart';
+import '../chart/chart_page.dart';
+import 'bloc/stock_bloc.dart';
 import 'components/background_widget.dart';
 import 'components/stock_item.dart';
 
@@ -17,10 +18,12 @@ class StockPage extends StatefulWidget {
 
 class _StockPageState extends State<StockPage>
     with SingleTickerProviderStateMixin {
+  final StockBloc _stockBloc = StockBloc();
+
   @override
   void initState() {
+    _stockBloc.add(GetStockList());
     super.initState();
-    stocksBloc.getStocks();
   }
 
   @override
@@ -83,24 +86,7 @@ class _StockPageState extends State<StockPage>
                   )
                 ],
               )),
-          SizedBox(
-            height: size.height,
-            child: StreamBuilder<StockResponse>(
-              stream: stocksBloc.subject.stream,
-              builder: (context, AsyncSnapshot<StockResponse> snapshot) {
-                if (snapshot.hasData) {
-                  if (snapshot.data!.error.isNotEmpty) {
-                    return _buildErrorWidget(snapshot.data!.error);
-                  }
-                  return _buildListStock(size, snapshot.data!);
-                } else if (snapshot.hasError) {
-                  return _buildErrorWidget(snapshot.error.toString());
-                } else {
-                  return _buildLoadingWidget();
-                }
-              },
-            ),
-          ),
+          SizedBox(height: size.height, child: _buildListStock(size))
         ],
       )),
     );
@@ -114,45 +100,43 @@ class _StockPageState extends State<StockPage>
           style: AppTextStyles.h2,
         ));
   }
-}
 
-Widget _buildErrorWidget(String error) {
-  return Center(
-      child: Column(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      Text("Error occured: $error"),
-    ],
-  ));
-}
+  Widget _buildListStock(Size size) {
+    // final List<Stock> stockInit = data.stock;
+    return Padding(
+        padding: const EdgeInsets.only(top: 60),
+        child: 
+        BlocProvider(
+            create: (_) => _stockBloc,
+            child:
+                BlocListener<StockBloc, StockState>(listener: (context, state) {
+              if (state is StockError) {
+                ErrorWidget(state.message);
+              }
+            }, child: BlocBuilder<StockBloc, StockState>(
+              builder: (context, state) {
+                if (state is StockInitial) {
+                  return const LoadingWidget();
+                } else if (state is StockLoading) {
+                  return const LoadingWidget();
+                } else if (state is StockLoaded) {
+                  return _buildStock(context, state.stock, size);
+                } else if (state is StockError) {
+                  return ErrorWidget(state.message);
+                } else {
+                  return Container();
+                }
+              },
+            )))
+            );
+  }
 
-Widget _buildLoadingWidget() {
-  return Align(
-      alignment: Alignment.center,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
-          SizedBox(
-            height: 25.0,
-            width: 25.0,
-            child: CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-              strokeWidth: 4.0,
-            ),
-          )
-        ],
-      ));
-}
-
-Widget _buildListStock(Size size, StockResponse data) {
-  final List<Stock> stockInit = data.stock;
-  return Padding(
-    padding: const EdgeInsets.only(top: 60),
-    child: ListView.builder(
+  Widget _buildStock(BuildContext context, StockResponse stock, Size size) {
+    return ListView.builder(
       scrollDirection: Axis.vertical,
-      itemCount: stockInit.length,
+      itemCount: stock.stock.length,
       itemBuilder: (context, index) {
-        if (stockInit[index].symbol == "VND") {
+        if (stock.stock[index].symbol == "VND") {
           return const SizedBox.shrink();
         }
         return GestureDetector(
@@ -161,16 +145,16 @@ Widget _buildListStock(Size size, StockResponse data) {
               context,
               MaterialPageRoute(
                   builder: (context) => ChartPage(
-                      symbolStock: stockInit[index].symbol,
-                      nameStock: stockInit[index].name)),
+                      symbolStock: stock.stock[index].symbol,
+                      nameStock: stock.stock[index].name)),
             );
           },
           child: StockItem(
             size: size,
-            name: stockInit[index].symbol,
+            name: stock.stock[index].symbol,
           ),
         );
       },
-    ),
-  );
+    );
+  }
 }

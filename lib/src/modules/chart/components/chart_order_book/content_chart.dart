@@ -1,16 +1,18 @@
-// ignore_for_file: depend_on_referenced_packages, no_logic_in_create_state
+// ignore_for_file: depend_on_referenced_packages, no_logic_in_create_state, no_leading_underscores_for_local_identifiers
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_flutter/src/models/order.dart';
 import 'package:movie_flutter/src/models/order_response.dart';
 import 'package:movie_flutter/src/modules/chart/components/chart_order_book/order_book_sale.dart';
-import 'package:movie_flutter/src/modules/chart/get_order_bloc.dart';
 import 'package:movie_flutter/src/styles/themes/app_colors.dart';
 import 'package:movie_flutter/src/styles/themes/app_text_styles.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:intl/intl.dart';
 import '../../../../network/models/response/get_kLineChart_report.dart';
 import '../../../../network/repositories/api_v1/kline_chart_repo.dart';
+import '../../../../styles/widgets/loading_widget.dart';
+import '../../bloc/chart_bloc.dart';
 import 'order_book_buy.dart';
 
 class ContentChart extends StatefulWidget {
@@ -20,20 +22,22 @@ class ContentChart extends StatefulWidget {
   final String? symbolStock;
 
   @override
-  State<ContentChart> createState() => _ContentChartState(symbolStock);
+  State<ContentChart> createState() => _ContentChartState();
 }
 
 class _ContentChartState extends State<ContentChart> {
-  final String? symbolStock;
-  _ContentChartState(this.symbolStock);
+  late final ChartBloc _chartBlocBid = ChartBloc();
+  late final ChartBloc _chartBlocAsk = ChartBloc();
+
   late double? minimum;
   late double? maximum;
+
   @override
   void initState() {
-    super.initState();
-    orderBooksBlocBid.getOrders(symbolStock, "bid");
-    orderBooksBlocAsk.getOrders(symbolStock, "ask");
+    _chartBlocBid.add(GetOrderSaleList(widget.symbolStock, "bid"));
+    _chartBlocAsk.add(GetOrderSaleList(widget.symbolStock, "ask"));
     KLineChartRepoImpl().getKLineChartReport();
+    super.initState();
   }
 
   @override
@@ -45,26 +49,6 @@ class _ContentChartState extends State<ContentChart> {
             future: KLineChartRepoImpl()
                 .getKLineChartReport(path: widget.symbolStock.toString()),
             builder: (context, snapshot) {
-              // if (snapshot.hasData) {
-              //   if (snapshot.data != null) {
-              //     final String dataMin = snapshot.data?.charts
-              //             .reduce((e, min) {
-              //               if (min.low! < e.low!) {
-              //                 return min;
-              //               } else {
-              //                 return e;
-              //               }
-              //             })
-              //             .low
-              //             .toString() ??
-              //         '';
-              //     minimum = double.tryParse(dataMin) ?? 0;
-              //   } else if (snapshot.hasError) {
-              //     return _buildErrorWidget(snapshot.error.toString());
-              //   } else {
-              //     return _buildLoadingWidget();
-              //   }
-              // }
               return Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -122,24 +106,31 @@ class _ContentChartState extends State<ContentChart> {
                     SizedBox(
                         height: widget.size.height,
                         width: widget.size.width / 2.6,
-                        child: StreamBuilder<OrderResponse>(
-                            stream: orderBooksBlocBid.subject.stream,
-                            builder: (context,
-                                AsyncSnapshot<OrderResponse> snapshot) {
-                              if (snapshot.hasData) {
-                                if (snapshot.data!.error.isNotEmpty) {
-                                  return _buildErrorWidget(
-                                      snapshot.data!.error);
-                                }
-                                return _buildListOrderBookBid(
-                                    widget.size, snapshot.data!);
-                              } else if (snapshot.hasError) {
-                                return _buildErrorWidget(
-                                    snapshot.error.toString());
-                              } else {
-                                return _buildLoadingWidget();
+                        child: BlocProvider(
+                            create: (_) => _chartBlocBid,
+                            child: BlocListener<ChartBloc, ChartState>(
+                                listener: (context, state) {
+                              if (state is ChartError) {
+                                ErrorWidget(state.message);
                               }
-                            }))
+                            }, child: BlocBuilder<ChartBloc, ChartState>(
+                              builder: (context, state) {
+                                if (state is ChartInitial) {
+                                  return const LoadingWidget();
+                                } else if (state is ChartLoading) {
+                                  return const LoadingWidget();
+                                } else if (state is ChartOrderLoaded) {
+                                  return _buildListOrderBookBid(
+                                    widget.size,
+                                    state.chart,
+                                  );
+                                } else if (state is ChartError) {
+                                  return ErrorWidget(state.message);
+                                } else {
+                                  return Container();
+                                }
+                              },
+                            ))))
                   ],
                 ),
               ),
@@ -157,24 +148,31 @@ class _ContentChartState extends State<ContentChart> {
                     SizedBox(
                         height: widget.size.height,
                         width: widget.size.width / 2.6,
-                        child: StreamBuilder<OrderResponse>(
-                            stream: orderBooksBlocAsk.subject.stream,
-                            builder: (context,
-                                AsyncSnapshot<OrderResponse> snapshot) {
-                              if (snapshot.hasData) {
-                                if (snapshot.data!.error.isNotEmpty) {
-                                  return _buildErrorWidget(
-                                      snapshot.data!.error);
-                                }
-                                return _buildListOrderBookAsk(
-                                    widget.size, snapshot.data!);
-                              } else if (snapshot.hasError) {
-                                return _buildErrorWidget(
-                                    snapshot.error.toString());
-                              } else {
-                                return _buildLoadingWidget();
+                        child: BlocProvider(
+                            create: (_) => _chartBlocAsk,
+                            child: BlocListener<ChartBloc, ChartState>(
+                                listener: (context, state) {
+                              if (state is ChartError) {
+                                ErrorWidget(state.message);
                               }
-                            }))
+                            }, child: BlocBuilder<ChartBloc, ChartState>(
+                              builder: (context, state) {
+                                if (state is ChartInitial) {
+                                  return const LoadingWidget();
+                                } else if (state is ChartLoading) {
+                                  return const LoadingWidget();
+                                } else if (state is ChartOrderLoaded) {
+                                  return _buildListOrderBookAsk(
+                                    widget.size,
+                                    state.chart,
+                                  );
+                                } else if (state is ChartError) {
+                                  return ErrorWidget(state.message);
+                                } else {
+                                  return Container();
+                                }
+                              },
+                            ))))
                   ],
                 ),
               ),
@@ -214,32 +212,4 @@ Widget _buildListOrderBookBid(Size size, OrderResponse data) {
       );
     },
   );
-}
-
-Widget _buildErrorWidget(String error) {
-  return Center(
-      child: Column(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      Text("Error occured: $error"),
-    ],
-  ));
-}
-
-Widget _buildLoadingWidget() {
-  return Align(
-      alignment: Alignment.center,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: const [
-          SizedBox(
-            height: 25.0,
-            width: 25.0,
-            child: CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-              strokeWidth: 4.0,
-            ),
-          )
-        ],
-      ));
 }

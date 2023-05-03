@@ -1,6 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/get_navigation.dart';
 import 'package:logger/logger.dart';
 import 'package:movie_flutter/src/config/api/user_repository.dart';
 import 'package:movie_flutter/src/models/assets_response.dart';
@@ -8,7 +6,6 @@ import 'package:movie_flutter/src/models/list_order_response.dart';
 import 'package:movie_flutter/src/models/market_response.dart';
 import 'package:movie_flutter/src/models/order_response.dart';
 import 'package:movie_flutter/src/models/stock_response.dart';
-import 'package:movie_flutter/src/modules/home/home_page.dart';
 
 class CryptoRepository {
   static String mainUrl = "https://stock-be.fly.dev";
@@ -39,7 +36,7 @@ class CryptoRepository {
   var logger = Logger();
 
   Future<StockResponse> getStock() async {
-    print('thasnhfadsf ${UserRepository().dataToken}');
+    // print('thasnhfadsf ${UserRepository().dataToken}');
     var params = {"language": "en-US"};
     try {
       Response response = await _dio.get(getStockUrl, queryParameters: params);
@@ -87,9 +84,15 @@ class CryptoRepository {
     }
   }
 
-  Future<void> postCancleOrder(String? id) async {
+
+  Future<ListOrderResponse> postCancleOrder(String? id) async {
     var data = {"orderId": id};
-    await _dio.post(postCancleOrderUrl, data: data);
+    try {
+      Response response = await _dio.post(postCancleOrderUrl, data: data);
+      return ListOrderResponse.fromJson(response.data);
+    } catch (error) {
+      return ListOrderResponse.withError("$error");
+    }
   }
 
   Future<void> postCreateOrderBid(
@@ -127,7 +130,6 @@ class CryptoRepository {
     var data = {"amount": amount};
     try {
       await _dio.post(postdepositUrl, data: data);
-      Get.to(() => const HomePage());
     } catch (error) {
       rethrow;
     }
@@ -137,7 +139,6 @@ class CryptoRepository {
     var data = {"amount": amount};
     try {
       await _dio.post(postWithdrawUrl, data: data);
-      Get.to(() => const HomePage());
     } catch (error) {
       rethrow;
     }

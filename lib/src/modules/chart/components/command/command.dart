@@ -1,13 +1,15 @@
-// ignore_for_file: no_logic_in_create_state
+// ignore_for_file: no_logic_in_create_state, non_constant_identifier_names
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_flutter/src/models/list_order.dart';
 import 'package:movie_flutter/src/models/list_order_response.dart';
 import 'package:movie_flutter/src/modules/chart/components/command/row_item.dart';
-import 'package:movie_flutter/src/modules/chart/get_list_order_bloc.dart';
 import '../../../../config/api/crypto_repository.dart';
 import '../../../../styles/themes/app_colors.dart';
 import 'package:intl/intl.dart';
+import '../../../../styles/widgets/loading_widget.dart';
+import '../../bloc/chart_bloc.dart';
 
 class Command extends StatefulWidget {
   const Command({
@@ -18,43 +20,44 @@ class Command extends StatefulWidget {
   final Size size;
   final String? symbolStock;
   @override
-  State<StatefulWidget> createState() => _CommandState(symbolStock);
+  State<StatefulWidget> createState() => _CommandState();
 }
 
 class _CommandState extends State<Command> {
-  final String? symbolStock;
-  _CommandState(this.symbolStock);
+  final ChartBloc _ListOrders = ChartBloc();
 
   @override
   void initState() {
+    _ListOrders.add(GetOrderList(widget.symbolStock));
     super.initState();
-    listOrdersBloc.getListOrders(symbolStock);
   }
-  // @override
-  // void incrementCounter() {
-  //   setState(() {
-  //     listOrdersBloc.getListOrders(symbolStock);
-  //   });
-  // }
 
   @override
   Widget build(BuildContext context) {
     return Container(
         margin: const EdgeInsets.only(top: 20),
-        child: StreamBuilder<ListOrderResponse>(
-            stream: listOrdersBloc.subject.stream,
-            builder: (context, AsyncSnapshot<ListOrderResponse> snapshot) {
-              if (snapshot.hasData) {
-                if (snapshot.data!.error.isNotEmpty) {
-                  return _buildErrorWidget(snapshot.data!.error);
-                }
-                return _buildOrderItem(widget.size, snapshot.data!);
-              } else if (snapshot.hasError) {
-                return _buildErrorWidget(snapshot.error.toString());
-              } else {
-                return _buildLoadingWidget();
+        child: BlocProvider(
+            create: (_) => _ListOrders,
+            child:
+                BlocListener<ChartBloc, ChartState>(listener: (context, state) {
+              if (state is ChartError) {
+                ErrorWidget(state.message);
               }
-            }));
+            }, child: BlocBuilder<ChartBloc, ChartState>(
+              builder: (context, state) {
+                if (state is ChartInitial) {
+                  return const LoadingWidget();
+                } else if (state is ChartLoading) {
+                  return const LoadingWidget();
+                } else if (state is ChartDataLoaded) {
+                  return _buildOrderItem(widget.size, state.data);
+                } else if (state is ChartError) {
+                  return ErrorWidget(state.message);
+                } else {
+                  return Container();
+                }
+              },
+            ))));
   }
 }
 
@@ -117,7 +120,7 @@ Widget _buildOrderItem(Size size, ListOrderResponse data) {
                         onTap: () {
                           CryptoRepository()
                               .postCancleOrder(listOrderInit[index].orderId);
-                          
+                          Navigator.of(context).pop();
                         },
                         child: Container(
                           decoration: BoxDecoration(
@@ -135,32 +138,4 @@ Widget _buildOrderItem(Size size, ListOrderResponse data) {
               )),
         );
       });
-}
-
-Widget _buildErrorWidget(String error) {
-  return Center(
-      child: Column(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      Text(error),
-    ],
-  ));
-}
-
-Widget _buildLoadingWidget() {
-  return Align(
-      alignment: Alignment.center,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
-          SizedBox(
-            height: 25.0,
-            width: 25.0,
-            child: CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-              strokeWidth: 4.0,
-            ),
-          )
-        ],
-      ));
 }

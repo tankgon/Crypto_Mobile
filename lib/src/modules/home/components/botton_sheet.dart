@@ -56,7 +56,6 @@ class _BottonSheet extends State<BottonSheet>
                         label: "Xác nhận Token",
                         controller: null,
                         obscureText: false,
-                       
                       ),
                       TextNumber(
                           lable: 'Số lượng nạp',
@@ -67,6 +66,7 @@ class _BottonSheet extends State<BottonSheet>
                         even: () {
                           CryptoRepository()
                               .postdeposit(int.tryParse(amountDeposit.text));
+                          Navigator.of(context).pop();
                         },
                       ),
                     ],
@@ -80,7 +80,6 @@ class _BottonSheet extends State<BottonSheet>
                         label: "Xác nhận Token",
                         controller: null,
                         obscureText: false,
-                      
                       ),
                       TextNumber(
                           lable: 'Số lượng rút',
@@ -91,6 +90,7 @@ class _BottonSheet extends State<BottonSheet>
                         even: () {
                           CryptoRepository()
                               .postWithdraw(int.tryParse(amountWithdraw.text));
+                          Navigator.of(context).pop();
                         },
                       ),
                     ],

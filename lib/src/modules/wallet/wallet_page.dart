@@ -1,15 +1,18 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, must_call_super
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:movie_flutter/src/models/assets.dart';
 import 'package:movie_flutter/src/models/assets_response.dart';
+
 import 'package:movie_flutter/src/styles/themes/app_colors.dart';
 import 'package:movie_flutter/src/styles/themes/app_text_styles.dart';
 
 import '../../models/login_response.dart';
 import '../../styles/widgets/gradien_text_widget.dart';
+import '../../styles/widgets/loading_widget.dart';
 import 'Components/item_wallet.dart';
-import 'get_assets_bloc.dart';
+import 'bloc/wallet_bloc.dart';
 
 class WalletPage extends StatefulWidget {
   const WalletPage({
@@ -22,101 +25,110 @@ class WalletPage extends StatefulWidget {
 }
 
 class _WalletPageState extends State<WalletPage> {
+  final WalletBloc _walletBloc = WalletBloc();
+
   @override
   void initState() {
-    assestBloc.getAssetsUser();
+    _walletBloc.add(GetWalletList());
+    super.initState();
+    // assestBloc.getAssetsUser();
   }
-  
 
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
-        body: StreamBuilder<AssetsResponse>(
-      stream: assestBloc.subject.stream,
-      builder: (context, AsyncSnapshot<AssetsResponse> snapshot) {
-        snapshot.data?.listAssest.map((e) {
-          return e.name;
-        });
-        if (snapshot.hasData) {
-          if (snapshot.data!.error.isNotEmpty) {
-            return _buildErrorWidget(snapshot.data!.error);
-          }
-          return SafeArea(
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 24.0, vertical: 30),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CircleAvatar(
-                          radius: size.height / 25,
-                          backgroundImage: const NetworkImage(
-                              "https://source.unsplash.com/random/200x200?sig=incrementingIdentifier"),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              GradientText(widget.dataProfile?.name ?? '',
-                                  style: AppTextStyles.h2,
-                                  gradient: AppColors.gradienIcon),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 8),
-                                child: Text(
-                                  widget.dataProfile?.phoneNumber ?? '',
-                                  style: AppTextStyles.h1C,
+        body: BlocProvider(
+            create: (_) => _walletBloc,
+            child: BlocListener<WalletBloc, WalletState>(
+                listener: (context, state) {
+              if (state is WalletError) {
+                ErrorWidget(state.message);
+              }
+            }, child: BlocBuilder<WalletBloc, WalletState>(
+              builder: (context, state) {
+                if (state is WalletInitial) {
+                  return const LoadingWidget();
+                } else if (state is WalletLoading) {
+                  return const LoadingWidget();
+                } else if (state is WalletLoaded) {
+                  return SafeArea(
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 24.0, vertical: 30),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                CircleAvatar(
+                                  radius: size.height / 25,
+                                  backgroundImage: const NetworkImage(
+                                      "https://source.unsplash.com/random/200x200?sig=incrementingIdentifier"),
                                 ),
-                              )
-                            ],
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      GradientText(
+                                          widget.dataProfile?.name ?? '',
+                                          style: AppTextStyles.h2,
+                                          gradient: AppColors.gradienIcon),
+                                      Padding(
+                                        padding: const EdgeInsets.only(top: 8),
+                                        child: Text(
+                                          widget.dataProfile?.phoneNumber ?? '',
+                                          style: AppTextStyles.h1C,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
-                        )
-                      ],
-                    ),
-                  ),
-                  for (var e in snapshot.data!.listAssest)
-                    if (e.symbol == 'VND')
-                      ItemInformation(
-                          size: size,
-                          label: 'Sd khả dụng',
-                          money: '${e.freeAsset}'),
-                  for (var e in snapshot.data!.listAssest)
-                    if (e.symbol == 'VND')
-                      ItemInformation(
-                        size: size,
-                        label: 'Sd giao dịch',
-                        money: '${e.lockedAsset}',
-                      ),
-                  Column(
-                    children: <Widget>[
-                      Padding(
-                          padding: const EdgeInsets.only(
-                              left: 24, right: 24, top: 12),
-                          child: SizedBox(
-                              height: size.width,
-                              child: _buildListStock(size, snapshot.data!)))
-                    ],
-                  )
-                ]),
-          );
-        } else if (snapshot.hasError) {
-          return _buildErrorWidget(snapshot.error.toString());
-        } else {
-          return _buildLoadingWidget();
-        }
-      },
-    ));
+                          for (var e in state.wallet.listAssest)
+                            if (e.symbol == 'VND')
+                              ItemInformation(
+                                  size: size,
+                                  label: 'Sd khả dụng',
+                                  money: '${e.freeAsset}'),
+                          for (var e in state.wallet.listAssest)
+                            if (e.symbol == 'VND')
+                              ItemInformation(
+                                size: size,
+                                label: 'Sd giao dịch',
+                                money: '${e.lockedAsset}',
+                              ),
+                          Column(
+                            children: <Widget>[
+                              Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 24, right: 24, top: 12),
+                                  child: SizedBox(
+                                      height: size.width,
+                                      child:
+                                          _buildListStock(size, state.wallet)))
+                            ],
+                          )
+                        ]),
+                  );
+                } else if (state is WalletError) {
+                  return ErrorWidget(state.message);
+                } else {
+                  return Container();
+                }
+              },
+            ))));
   }
 }
 
 Widget _buildListStock(Size size, AssetsResponse data) {
   final List<Assest> stockInit = data.listAssest;
-
   return Table(
     textDirection: TextDirection.rtl,
     defaultVerticalAlignment: TableCellVerticalAlignment.bottom,
@@ -170,32 +182,4 @@ Widget _buildListStock(Size size, AssetsResponse data) {
           ]),
     ],
   );
-}
-
-Widget _buildErrorWidget(String error) {
-  return Center(
-      child: Column(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      Text("Error occured: $error"),
-    ],
-  ));
-}
-
-Widget _buildLoadingWidget() {
-  return Align(
-      alignment: Alignment.center,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
-          SizedBox(
-            height: 25.0,
-            width: 25.0,
-            child: CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-              strokeWidth: 4.0,
-            ),
-          )
-        ],
-      ));
 }

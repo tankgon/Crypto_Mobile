@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:movie_flutter/src/modules/stock/components/stock_item.dart';
 import 'package:movie_flutter/src/styles/themes/app_colors.dart';
 import 'package:movie_flutter/src/styles/themes/app_text_styles.dart';
-import 'package:movie_flutter/src/modules/chart/components/chart_order_book/buy_page.dart';
-import 'package:movie_flutter/src/modules/chart/components/chart_order_book/sale_page.dart';
+import 'package:movie_flutter/src/modules/chart/components/chart_order_book/widgets/buy_page.dart';
+import 'package:movie_flutter/src/modules/chart/components/chart_order_book/widgets/sale_page.dart';
 
 import '../../../../styles/widgets/gradien_text_widget.dart';
 

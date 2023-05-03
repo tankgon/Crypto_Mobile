@@ -1,13 +1,14 @@
-// ignore_for_file: no_logic_in_create_state
+// ignore_for_file: no_logic_in_create_state, non_constant_identifier_names
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:movie_flutter/src/models/list_order.dart';
 import 'package:movie_flutter/src/models/list_order_response.dart';
 import 'package:movie_flutter/src/styles/themes/app_colors.dart';
 import 'package:movie_flutter/src/styles/themes/app_text_styles.dart';
-
-import '../../get_list_order_bloc.dart';
+import '../../../../styles/widgets/loading_widget.dart';
+import '../../bloc/chart_bloc.dart';
 import 'item_history.dart';
 
 class History extends StatefulWidget {
@@ -20,16 +21,16 @@ class History extends StatefulWidget {
   final Size size;
   final String? symbolStock;
   @override
-  State<History> createState() => _HistoryState(symbolStock);
+  State<History> createState() => _HistoryState();
 }
 
 class _HistoryState extends State<History> {
-  final String? symbolStock;
-  _HistoryState(this.symbolStock);
+  final ChartBloc _ListHistory = ChartBloc();
+
   @override
   void initState() {
     super.initState();
-    listHistory.getHistorys(symbolStock);
+    _ListHistory.add(GetHistoryList(widget.symbolStock));
   }
 
   @override
@@ -72,53 +73,32 @@ class _HistoryState extends State<History> {
           margin: const EdgeInsets.symmetric(vertical: 8),
         ),
         SizedBox(
-          height: widget.size.height / 2.3,
-          child: StreamBuilder<ListOrderResponse>(
-              stream: listHistory.subject.stream,
-              builder: (context, AsyncSnapshot<ListOrderResponse> snapshot) {
-                if (snapshot.hasData) {
-                  if (snapshot.data!.error.isNotEmpty) {
-                    return _buildErrorWidget(snapshot.data!.error);
+            height: widget.size.height / 2.3,
+            child: BlocProvider(
+                create: (_) => _ListHistory,
+                child: BlocListener<ChartBloc, ChartState>(
+                    listener: (context, state) {
+                  if (state is ChartError) {
+                    ErrorWidget(state.message);
                   }
-                  return _buildListHistory(widget.size, snapshot.data!);
-                } else if (snapshot.hasError) {
-                  return _buildErrorWidget(snapshot.error.toString());
-                } else {
-                  return _buildLoadingWidget();
-                }
-              }),
-        ),
+                }, child: BlocBuilder<ChartBloc, ChartState>(
+                  builder: (context, state) {
+                    if (state is ChartInitial) {
+                      return const LoadingWidget();
+                    } else if (state is ChartLoading) {
+                      return const LoadingWidget();
+                    } else if (state is ChartDataLoaded) {
+                      return _buildListHistory(widget.size, state.data);
+                    } else if (state is ChartError) {
+                      return ErrorWidget(state.message);
+                    } else {
+                      return Container();
+                    }
+                  },
+                ))))
       ]),
     ));
   }
-}
-
-Widget _buildErrorWidget(String error) {
-  return Center(
-      child: Column(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      Text("Error occured: $error"),
-    ],
-  ));
-}
-
-Widget _buildLoadingWidget() {
-  return Align(
-      alignment: Alignment.center,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
-          SizedBox(
-            height: 25.0,
-            width: 25.0,
-            child: CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-              strokeWidth: 4.0,
-            ),
-          )
-        ],
-      ));
 }
 
 Widget _buildListHistory(Size size, ListOrderResponse data) {

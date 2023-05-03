@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:movie_flutter/src/styles/themes/app_colors.dart';
 import 'package:movie_flutter/src/styles/themes/app_text_styles.dart';
 
-import '../../../../config/api/crypto_repository.dart';
-import '../../../../styles/widgets/input_number_widget.dart';
-import '../../../home/home_page.dart';
+import '../../../../../config/api/crypto_repository.dart';
+import '../../../../../styles/widgets/input_number_widget.dart';
 
 class SalePage extends StatelessWidget {
   const SalePage({
@@ -116,13 +115,7 @@ class SalePage extends StatelessWidget {
                       shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10)))),
                   onPressed: () {
-                    Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                        builder: (BuildContext context) => const HomePage(),
-                      ),
-                      (route) => false,
-                    );
+                    Navigator.of(context).pop();
                     CryptoRepository().postCreateOrderAsk(
                       symbolStock,
                       int.tryParse(price.text),

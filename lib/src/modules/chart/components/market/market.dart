@@ -1,12 +1,15 @@
-// ignore_for_file: no_logic_in_create_state
+
+// ignore_for_file: non_constant_identifier_names
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:movie_flutter/src/models/market.dart';
 import 'package:movie_flutter/src/models/market_response.dart';
 
 import '../../../../styles/themes/app_colors.dart';
-import '../../get_market_bloc.dart';
+import '../../../../styles/widgets/loading_widget.dart';
+import '../../bloc/chart_bloc.dart';
 import 'item_market.dart';
 
 class MarketWidget extends StatefulWidget {
@@ -20,16 +23,15 @@ class MarketWidget extends StatefulWidget {
   final String? symbolStock;
 
   @override
-  State<StatefulWidget> createState() => _MarketWidgetState(symbolStock);
+  State<StatefulWidget> createState() => _MarketWidgetState();
 }
 
 class _MarketWidgetState extends State<MarketWidget> {
-  final String? symbolStock;
-  _MarketWidgetState(this.symbolStock);
+  final ChartBloc _ListMarket = ChartBloc();
   @override
   void initState() {
     super.initState();
-    marketBloc.getMarket(symbolStock);
+    _ListMarket.add(GetMarketList(widget.symbolStock));
   }
 
   @override
@@ -67,22 +69,29 @@ class _MarketWidgetState extends State<MarketWidget> {
           margin: const EdgeInsets.symmetric(vertical: 8),
         ),
         SizedBox(
-          height: widget.size.height / 2.3,
-          child: StreamBuilder<MarketReponse>(
-              stream: marketBloc.subject.stream,
-              builder: (context, AsyncSnapshot<MarketReponse> snapshot) {
-                if (snapshot.hasData) {
-                  if (snapshot.data!.error.isNotEmpty) {
-                    return _buildErrorWidget(snapshot.data!.error);
+            height: widget.size.height / 2.3,
+            child: BlocProvider(
+                create: (_) => _ListMarket,
+                child: BlocListener<ChartBloc, ChartState>(
+                    listener: (context, state) {
+                  if (state is ChartError) {
+                    ErrorWidget(state.message);
                   }
-                  return _buildOrderItem(widget.size, snapshot.data!);
-                } else if (snapshot.hasError) {
-                  return _buildErrorWidget(snapshot.error.toString());
-                } else {
-                  return _buildLoadingWidget();
-                }
-              }),
-        )
+                }, child: BlocBuilder<ChartBloc, ChartState>(
+                  builder: (context, state) {
+                    if (state is ChartInitial) {
+                      return const LoadingWidget();
+                    } else if (state is ChartLoading) {
+                      return const LoadingWidget();
+                    } else if (state is ChartMarketLoaded) {
+                      return _buildOrderItem(widget.size, state.market);
+                    } else if (state is ChartError) {
+                      return ErrorWidget(state.message);
+                    } else {
+                      return Container();
+                    }
+                  },
+                ))))
       ]),
     );
   }
@@ -104,32 +113,4 @@ Widget _buildOrderItem(Size size, MarketReponse data) {
               marketInit[index].type == 'ask' ? AppColors.green : AppColors.red,
         );
       });
-}
-
-Widget _buildErrorWidget(String error) {
-  return Center(
-      child: Column(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      Text(error),
-    ],
-  ));
-}
-
-Widget _buildLoadingWidget() {
-  return Align(
-      alignment: Alignment.center,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
-          SizedBox(
-            height: 25.0,
-            width: 25.0,
-            child: CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-              strokeWidth: 4.0,
-            ),
-          )
-        ],
-      ));
 }
