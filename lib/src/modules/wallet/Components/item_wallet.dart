@@ -18,7 +18,7 @@ class ItemInformation extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 24),
-      height: size.height / 14,
+      height: size.height / 16,
       decoration: BoxDecoration(
           color: const Color.fromARGB(16, 33, 149, 243),
           borderRadius: BorderRadius.circular(10),

@@ -53,7 +53,7 @@ class _SignInPageState extends State<SignInPage> {
             const SizedBox(height: 30),
             InputToken(label: 'Email', controller: email, obscureText: false),
             InputToken(
-                label: 'Password', controller: password, obscureText: false),
+                label: 'Password', controller: password, obscureText: true),
             GradientButton(
                 name: 'Đăng nhập',
                 even: () {

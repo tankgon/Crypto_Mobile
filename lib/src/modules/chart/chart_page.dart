@@ -47,7 +47,7 @@ class _ChartPageState extends State<ChartPage>
             Stack(
               children: [
                 SizedBox(
-                  height: size.height / 16,
+                  height: size.height / 12,
                   child: const Center(
                     child: Text(
                       'Thông tin cổ phiếu',
@@ -75,11 +75,11 @@ class _ChartPageState extends State<ChartPage>
               symbolStock: symbolStock,
             ),
             SizedBox(
-              height: size.height / 1.68,
+              height: size.height / 2,
               child: Column(
                 children: [
                   Container(
-                    margin: const EdgeInsets.only(top: 20),
+                    margin: const EdgeInsets.only(top: 12),
                     alignment: Alignment.center,
                     width: size.width,
                     child: TabBar(

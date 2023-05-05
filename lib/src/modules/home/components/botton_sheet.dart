@@ -52,7 +52,7 @@ class _BottonSheet extends State<BottonSheet>
                   margin: const EdgeInsets.symmetric(horizontal: 24),
                   child: Column(
                     children: [
-                      const InputToken(
+                       InputToken(
                         label: "Xác nhận Token",
                         controller: null,
                         obscureText: false,
@@ -76,7 +76,7 @@ class _BottonSheet extends State<BottonSheet>
                   margin: const EdgeInsets.symmetric(horizontal: 30),
                   child: Column(
                     children: [
-                      const InputToken(
+                       InputToken(
                         label: "Xác nhận Token",
                         controller: null,
                         obscureText: false,

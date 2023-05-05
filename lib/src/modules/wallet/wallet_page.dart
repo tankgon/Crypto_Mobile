@@ -110,7 +110,7 @@ class _WalletPageState extends State<WalletPage> {
                                   padding: const EdgeInsets.only(
                                       left: 24, right: 24, top: 12),
                                   child: SizedBox(
-                                      height: size.width,
+                                      height: size.height / 2,
                                       child:
                                           _buildListStock(size, state.wallet)))
                             ],

@@ -54,7 +54,7 @@ class _ContentChartState extends State<ContentChart> {
                 children: [
                   Container(
                     padding: const EdgeInsets.only(
-                        right: 10, left: 10, bottom: 20, top: 20),
+                        right: 10, left: 10, bottom: 10, top: 10),
                     height: widget.size.height / 2.5,
                     width: widget.size.width / 1.1,
                     child: SfCartesianChart(

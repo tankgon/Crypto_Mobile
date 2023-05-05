@@ -1,4 +1,3 @@
-
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:flutter/material.dart';
@@ -36,63 +35,68 @@ class _MarketWidgetState extends State<MarketWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
-      child: Column(children: [
-        Container(
-          width: widget.size.width,
-          height: 1,
-          color: AppColors.white54,
-          margin: const EdgeInsets.symmetric(vertical: 8),
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: const [
-            Text(
-              'Giá',
-              style: TextStyle(color: AppColors.white54, fontSize: 16),
-            ),
-            Text(
-              'Số Lượng',
-              style: TextStyle(color: AppColors.white54, fontSize: 16),
-            ),
-            Text(
-              'Thời gian',
-              style: TextStyle(color: AppColors.white54, fontSize: 16),
-            ),
-          ],
-        ),
-        Container(
-          width: widget.size.width,
-          height: 1,
-          color: AppColors.white54,
-          margin: const EdgeInsets.symmetric(vertical: 8),
-        ),
-        SizedBox(
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+        child: Column(children: [
+          Container(
+            width: widget.size.width,
+            height: 1,
+            color: AppColors.white54,
+            margin: const EdgeInsets.symmetric(vertical: 8),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: const [
+              Text(
+                'Giá',
+                style: TextStyle(color: AppColors.white54, fontSize: 16),
+              ),
+              Text(
+                'Số Lượng',
+                style: TextStyle(color: AppColors.white54, fontSize: 16),
+              ),
+              Text(
+                'Thời gian',
+                style: TextStyle(color: AppColors.white54, fontSize: 16),
+              ),
+            ],
+          ),
+          Container(
+            width: widget.size.width,
+            height: 1,
+            color: AppColors.white54,
+            margin: const EdgeInsets.symmetric(vertical: 8),
+          ),
+         
+            SizedBox(
             height: widget.size.height / 2.3,
-            child: BlocProvider(
-                create: (_) => _ListMarket,
-                child: BlocListener<ChartBloc, ChartState>(
-                    listener: (context, state) {
-                  if (state is ChartError) {
-                    ErrorWidget(state.message);
-                  }
-                }, child: BlocBuilder<ChartBloc, ChartState>(
-                  builder: (context, state) {
-                    if (state is ChartInitial) {
-                      return const LoadingWidget();
-                    } else if (state is ChartLoading) {
-                      return const LoadingWidget();
-                    } else if (state is ChartMarketLoaded) {
-                      return _buildOrderItem(widget.size, state.market);
-                    } else if (state is ChartError) {
-                      return ErrorWidget(state.message);
-                    } else {
-                      return Container();
-                    }
-                  },
-                ))))
-      ]),
+
+              child: BlocProvider(
+                    create: (_) => _ListMarket,
+                    child: BlocListener<ChartBloc, ChartState>(
+                        listener: (context, state) {
+                      if (state is ChartError) {
+                        ErrorWidget(state.message);
+                      }
+                    }, child: BlocBuilder<ChartBloc, ChartState>(
+                      builder: (context, state) {
+                        if (state is ChartInitial) {
+                          return const LoadingWidget();
+                        } else if (state is ChartLoading) {
+                          return const LoadingWidget();
+                        } else if (state is ChartMarketLoaded) {
+                          return _buildOrderItem(widget.size, state.market);
+                        } else if (state is ChartError) {
+                          return ErrorWidget(state.message);
+                        } else {
+                          return Container();
+                        }
+                      },
+                    ))),
+            )
+        ]),
+      ),
     );
   }
 }
