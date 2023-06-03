@@ -75,7 +75,7 @@ class _ChartPageState extends State<ChartPage>
               symbolStock: symbolStock,
             ),
             SizedBox(
-              height: size.height / 2,
+              height: size.height / 1.6,
               child: Column(
                 children: [
                   Container(

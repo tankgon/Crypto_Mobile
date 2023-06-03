@@ -68,7 +68,7 @@ Widget _buildOrderItem(Size size, ListOrderResponse data) {
       itemCount: listOrderInit.length,
       itemBuilder: (context, index) {
         return Padding(
-          padding: const EdgeInsets.only(bottom: 10),
+          padding: const EdgeInsets.only(bottom: 8),
           child: Container(
               padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
               margin: const EdgeInsets.only(left: 20, right: 20),
@@ -101,7 +101,7 @@ Widget _buildOrderItem(Size size, ListOrderResponse data) {
                   Expanded(
                       flex: 4,
                       child: Container(
-                        height: size.height / 13,
+                        height: 58,
                         padding: const EdgeInsets.only(right: 16),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,

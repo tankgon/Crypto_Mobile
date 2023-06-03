@@ -19,16 +19,12 @@ class StockItem extends StatefulWidget {
 }
 
 class _StockItemState extends State<StockItem> {
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-        margin: const EdgeInsets.only(top: 10, bottom: 10, left: 20, right: 20),
+        margin: const EdgeInsets.only(top: 0, bottom: 10, left: 20, right: 20),
         decoration: BoxDecoration(
             color: AppColors.white10, borderRadius: BorderRadius.circular(10)),
         child: FutureBuilder(

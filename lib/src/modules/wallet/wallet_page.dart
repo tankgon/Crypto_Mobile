@@ -58,7 +58,7 @@ class _WalletPageState extends State<WalletPage> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.symmetric(
-                                horizontal: 24.0, vertical: 30),
+                                horizontal: 24.0, vertical: 12),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -110,7 +110,7 @@ class _WalletPageState extends State<WalletPage> {
                                   padding: const EdgeInsets.only(
                                       left: 24, right: 24, top: 12),
                                   child: SizedBox(
-                                      height: size.height / 2,
+                                      height: size.height / 1.7,
                                       child:
                                           _buildListStock(size, state.wallet)))
                             ],
@@ -129,57 +129,63 @@ class _WalletPageState extends State<WalletPage> {
 
 Widget _buildListStock(Size size, AssetsResponse data) {
   final List<Assest> stockInit = data.listAssest;
-  return Table(
-    textDirection: TextDirection.rtl,
-    defaultVerticalAlignment: TableCellVerticalAlignment.bottom,
-    border: TableBorder.all(
-        borderRadius: BorderRadius.circular(10),
-        width: 1.0,
-        color: AppColors.white54),
-    children: [
-      const TableRow(
-          decoration: BoxDecoration(
-            color: Color.fromARGB(16, 33, 149, 243),
-          ),
-          children: [
-            Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Text("Cổ phiếu khóa", textScaleFactor: 1.2),
-            ),
-            Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Text("Cổ phiếu hợp lệ", textScaleFactor: 1.2),
-            ),
-            Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Text("Cổ phiếu", textScaleFactor: 1.2),
-            ),
-          ]),
-      for (var e in stockInit)
-        if (e.symbol != 'VND')
-          TableRow(children: [
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Text(
-                e.lockedAsset ?? '',
-                style: const TextStyle(color: AppColors.red),
+  return SingleChildScrollView(
+    child: SizedBox(
+      width: size.width,
+      height: size.height / 1.15,
+      child: Table(
+        textDirection: TextDirection.rtl,
+        defaultVerticalAlignment: TableCellVerticalAlignment.bottom,
+        border: TableBorder.all(
+            borderRadius: BorderRadius.circular(10),
+            width: 1.0,
+            color: AppColors.white54),
+        children: [
+          const TableRow(
+              decoration: BoxDecoration(
+                color: Color.fromARGB(16, 33, 149, 243),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Text(
-                e.freeAsset ?? '',
-                style: const TextStyle(color: AppColors.green),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Text(
-                e.symbol ?? '',
-                style: AppTextStyles.h1W,
-              ),
-            ),
-          ]),
-    ],
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child: Text("Cổ phiếu khóa", textScaleFactor: 1.2),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child: Text("Cổ phiếu hợp lệ", textScaleFactor: 1.2),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child: Text("Cổ phiếu", textScaleFactor: 1.2),
+                ),
+              ]),
+          for (var e in stockInit)
+            if (e.symbol != 'VND')
+              TableRow(children: [
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Text(
+                    e.lockedAsset ?? '',
+                    style: const TextStyle(color: AppColors.red),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Text(
+                    e.freeAsset ?? '',
+                    style: const TextStyle(color: AppColors.green),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Text(
+                    e.symbol ?? '',
+                    style: AppTextStyles.h1W,
+                  ),
+                ),
+              ]),
+        ],
+      ),
+    ),
   );
 }

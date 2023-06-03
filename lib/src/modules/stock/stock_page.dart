@@ -104,9 +104,8 @@ class _StockPageState extends State<StockPage>
   Widget _buildListStock(Size size) {
     // final List<Stock> stockInit = data.stock;
     return Padding(
-        padding: const EdgeInsets.only(top: 60),
-        child: 
-        BlocProvider(
+        padding: const EdgeInsets.only(top: 60, bottom: 100),
+        child: BlocProvider(
             create: (_) => _stockBloc,
             child:
                 BlocListener<StockBloc, StockState>(listener: (context, state) {
@@ -127,8 +126,7 @@ class _StockPageState extends State<StockPage>
                   return Container();
                 }
               },
-            )))
-            );
+            ))));
   }
 
   Widget _buildStock(BuildContext context, StockResponse stock, Size size) {

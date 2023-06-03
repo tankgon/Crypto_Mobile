@@ -50,20 +50,6 @@ class _SignUpPageState extends State<SignUpPage> {
           padding: const EdgeInsets.all(15),
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            // Center(
-            //   child: Container(
-            //     width: size.width / 2,
-            //     height: size.height / 14,
-            //     margin: const EdgeInsets.symmetric(vertical: 30),
-            //     decoration: BoxDecoration(
-            //       borderRadius: BorderRadius.circular(14),
-            //       image: const DecorationImage(
-            //         fit: BoxFit.cover,
-            //         image: AssetImage('images/logo_main.png'),
-            //       ),
-            //     ),
-            //   ),
-            // ),
             const Padding(
               padding: EdgeInsets.only(bottom: 20),
               child: ArrowBack(),
@@ -136,7 +122,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   password.text,
                   fullName.text,
                   address.text,
-                  phoneNumber.text,
+                  double.parse(phoneNumber.text),
                   identificationNumber.text,
                   getTextDate(),
                 );

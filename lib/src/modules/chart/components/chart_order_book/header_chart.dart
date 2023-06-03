@@ -5,8 +5,6 @@ import 'package:movie_flutter/src/styles/themes/app_text_styles.dart';
 import 'package:movie_flutter/src/modules/chart/components/chart_order_book/widgets/buy_page.dart';
 import 'package:movie_flutter/src/modules/chart/components/chart_order_book/widgets/sale_page.dart';
 
-import '../../../../styles/widgets/gradien_text_widget.dart';
-
 class HeaderChart extends StatelessWidget {
   const HeaderChart({
     Key? key,
@@ -25,11 +23,15 @@ class HeaderChart extends StatelessWidget {
       alignment: Alignment.center,
       child: Column(
         children: [
-          GradientText(
-            nameStock ?? '',
-            style: AppTextStyles.h3,
-            gradient: AppColors.gradienText,
-          ),
+          // Container(
+          //   alignment: Alignment.center,
+          //   margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+          //   child: GradientText(
+          //     nameStock ?? '',
+          //     style: AppTextStyles.h3,
+          //     gradient: AppColors.gradienText,
+          //   ),
+          // ),
           Container(
             width: size.width,
             padding: const EdgeInsets.only(top: 10, bottom: 10),

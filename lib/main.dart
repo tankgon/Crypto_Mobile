@@ -18,10 +18,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        // primarySwatch: Colors.blue,
+        // primarySwatcllh: Colors.blue,
         fontFamily: 'montserrat',
         // scaffoldBackgroundColor: const Color(0xff131e30),
-        scaffoldBackgroundColor: AppColors.main,
+        scaffoldBackgroundColor: AppColors.main, 
         textTheme: Theme.of(context)
             .textTheme
             .apply(bodyColor: AppColors.white, displayColor: AppColors.white),

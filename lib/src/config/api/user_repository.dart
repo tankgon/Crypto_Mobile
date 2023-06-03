@@ -39,7 +39,7 @@ class UserRepository {
       String? password,
       String? fullName,
       String? address,
-      String? phoneNumber,
+      double? phoneNumber,
       String? identificationNumber,
       String? birthday) async {
     var data = {

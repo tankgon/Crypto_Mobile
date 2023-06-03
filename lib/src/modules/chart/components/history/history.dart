@@ -73,7 +73,7 @@ class _HistoryState extends State<History> {
           margin: const EdgeInsets.symmetric(vertical: 8),
         ),
         SizedBox(
-            height: widget.size.height / 2.3,
+            height: widget.size.height / 2,
             child: BlocProvider(
                 create: (_) => _ListHistory,
                 child: BlocListener<ChartBloc, ChartState>(

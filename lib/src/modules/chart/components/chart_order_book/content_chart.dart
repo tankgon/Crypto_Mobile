@@ -56,7 +56,7 @@ class _ContentChartState extends State<ContentChart> {
                     padding: const EdgeInsets.only(
                         right: 10, left: 10, bottom: 10, top: 10),
                     height: widget.size.height / 2.5,
-                    width: widget.size.width / 1.1,
+                    width: widget.size.width,
                     child: SfCartesianChart(
                       series: <CandleSeries>[
                         CandleSeries<KLineChartResData, DateTime>(
